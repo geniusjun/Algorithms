@@ -1,0 +1,18 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+    int a, b;
+    cin >> a >> b;
+
+    int c = b % 10;          // b의 1의 자리
+    int d = (b / 10) % 10;   // b의 10의 자리
+    int e = b / 100;         // b의 100의 자리
+
+    cout << a * c << '\n';   // 첫 번째 줄: a * b의 1의 자리
+    cout << a * d << '\n';   // 두 번째 줄: a * b의 10의 자리
+    cout << a * e << '\n';   // 세 번째 줄: a * b의 100의 자리
+    cout << a * b << '\n';   // 네 번째 줄: a * b 전체 곱셈 결과
+    
+    return 0;
+}

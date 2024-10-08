@@ -2,6 +2,9 @@
 
 [문제 링크](https://www.acmicpc.net/problem/10951) 
 
+### 꺠달은 점
+Scanner로 입력받을 떄 이용하는 경우 종료시점을 안 알려주는 경우 sc.hasnext() 와 while로 종료시점을 결정하자.
+
 ### 성능 요약
 
 메모리: 17804 KB, 시간: 184 ms

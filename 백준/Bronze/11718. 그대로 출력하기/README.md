@@ -2,6 +2,9 @@
 
 [문제 링크](https://www.acmicpc.net/problem/11718) 
 
+### 깨달은 점
+hasNext()로 while문, 입력을 끝내게 하는 방법 유용한 것 같다.
+
 ### 성능 요약
 
 메모리: 17948 KB, 시간: 192 ms

@@ -4,22 +4,14 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-
+        int A[] = new int[201];
         int N = sc.nextInt();
-        int[] A = new int[N];
+
         for(int i = 0; i<N; i++){
-            A[i] = sc.nextInt();
+            int index = sc.nextInt();
+            A[index+100]++;
         }
         int x = sc.nextInt();
-        int count = 0;
-        for (int k : A) {
-            if(k == x){
-                count++;
-            }
-        }
-        System.out.println(count);
-
-
+        System.out.println(A[x+100]);
     }
 }
-

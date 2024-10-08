@@ -2,6 +2,9 @@
 
 [문제 링크](https://www.acmicpc.net/problem/10757) 
 
+### 깨달은 점
+자바에서 이렇게 큰수를 다룰 때는 java.math.BigInteger import를 이용하여 BigIntger로 매우 큰수를 받을 수 있다. 덧셈도 add()라는 해당 import 메서드로 이용!
+
 ### 성능 요약
 
 메모리: 20936 KB, 시간: 348 ms

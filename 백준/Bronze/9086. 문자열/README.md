@@ -7,6 +7,8 @@ nextInt()와 nextLine()을 쓸 때 정수 입력받고 남은 엔터를 nextLine
 그래서 아예 nextLine()으로 엔터까지 다 받은 다음 Integer.parseInt로 정수로 바꿔주자. 많은 쓰이는 패턴
 그리고 .length로 문자열의 마지막 index안에 들어있는 값을 가져올때 .length-1 하는 거 잊지말자.... 0부터 시작하잖아 창준아 제발~~
 
+substring(Index)도 잘쓰자
+
 ### 성능 요약
 
 메모리: 17648 KB, 시간: 160 ms

@@ -6,8 +6,8 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        int T = sc.nextInt();
-        sc.nextLine();
+        int T = Integer.parseInt(sc.nextLine());
+        
 
         for(int i = 0; i < T; i++){
             String text = sc.nextLine();
@@ -17,4 +17,3 @@ public class Main {
         }
     }
 }
-

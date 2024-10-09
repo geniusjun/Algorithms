@@ -2,6 +2,10 @@
 
 [문제 링크](https://www.acmicpc.net/problem/2744) 
 
+### 깨달은 점
+StringBuilder와 Character.toLowerCase(), Charactoer.toUpperCase() 같은 함수를 잘 이용하여 대소문자를 민감하게 다룰 수 있는 좋은 문제! 
+StringBuilder로 생성한 객체에 append()로 문자열을 저장할 수 있다.
+
 ### 성능 요약
 
 메모리: 17632 KB, 시간: 164 ms

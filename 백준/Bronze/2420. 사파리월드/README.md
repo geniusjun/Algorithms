@@ -2,6 +2,9 @@
 
 [문제 링크](https://www.acmicpc.net/problem/2420) 
 
+## 깨달은 점
+자바의 Math class중에 절댓갑 반환해주는 abs 있다잉
+
 ### 성능 요약
 
 메모리: 17684 KB, 시간: 168 ms

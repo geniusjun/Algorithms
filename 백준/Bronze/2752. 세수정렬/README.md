@@ -2,6 +2,10 @@
 
 [문제 링크](https://www.acmicpc.net/problem/2752) 
 
+### 깨달은 점
+Array.sort() 하면 배열이 오름차순으로 정렬된다. 내림차순을 하고싶다면 자료구조를 반대로 출력하거나,
+Collections.reverseOrder() 를 쓰면되는데, 이거는 Collection 객체 함수라 래퍼 클래스로 입력을 받아서 배열에 넣어야한다!
+
 ### 성능 요약
 
 메모리: 18744 KB, 시간: 200 ms

@@ -12,12 +12,12 @@ public class Main {
         int[] alphabet = new int[26];
 
         for(int i = 0; i<arr.length; i++){
-            alphabet[(int)(arr[i] - 'a')]++;
+            alphabet[(arr[i] - 97)]++;
         }
         for (int i : alphabet) {
             System.out.print(i + " ");
         }
-        
+
     }
 }
 

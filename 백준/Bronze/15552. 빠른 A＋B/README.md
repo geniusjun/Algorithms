@@ -2,6 +2,9 @@
 
 [문제 링크](https://www.acmicpc.net/problem/15552) 
 
+### 깨달은 점
+입출력이 많을 때는 시간초과를 막기위 BufferedReader와 BufferedWriter을 이용해야한다 잘 알고있자.
+
 ### 성능 요약
 
 메모리: 236068 KB, 시간: 740 ms

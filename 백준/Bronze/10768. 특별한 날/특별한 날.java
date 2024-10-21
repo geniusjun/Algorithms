@@ -9,16 +9,18 @@ public class Main {
         int month = sc.nextInt();
         int day = sc.nextInt();
 
-        if(month < 2 && day<=31){
+        if(month < 2){
             System.out.println("Before");
-        } else if(month == 2 && day<18){
-            System.out.println("Before");
-        } else if (month == 2 && day > 18 && day<=31 ){
+        } else if(month>2){
             System.out.println("After");
-        } else if (month >= 3 && month<=12 && day>= 1 && day<=31){
-            System.out.println("After");
-        } else if (month == 2 && day == 18){
-            System.out.println("Special");
+        } else{
+            if(day < 18){
+                System.out.println("Before");
+            } else if (day > 18){
+                System.out.println("After");
+            } else{
+                System.out.println("Special");
+            }
         }
     }
 }

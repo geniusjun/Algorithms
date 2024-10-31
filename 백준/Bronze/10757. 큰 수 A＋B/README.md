@@ -1,4 +1,4 @@
-# [Bronze V] 큰 수 A+B - 10757 
+#  ⭐ ⭐[Bronze V] 큰 수 A+B - 10757 
 
 [문제 링크](https://www.acmicpc.net/problem/10757) 
 

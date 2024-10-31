@@ -1,4 +1,4 @@
-# [Bronze IV] 알파벳 개수 - 10808 
+# ⭐ ⭐ [Bronze IV] 알파벳 개수 - 10808 
 
 [문제 링크](https://www.acmicpc.net/problem/10808) 
 

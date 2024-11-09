@@ -1,16 +1,14 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
 
-        String input = sc.nextLine().trim();  // 앞뒤 공백 제거
-
-        if (input.isEmpty()) {  // 공백만 있을 경우
-            System.out.println(0);
-        } else {
-            String[] s = input.split(" ");
-            System.out.println(s.length);
-        }
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        System.out.println(st.countTokens());
     }
 }

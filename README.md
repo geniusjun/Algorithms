@@ -10,4 +10,4 @@
 
 ## 사용하는 도구 및 언어
 
-- **Languages**: Java
+- **Languages**: Java, c++

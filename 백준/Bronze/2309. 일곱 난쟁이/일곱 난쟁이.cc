@@ -1,32 +1,26 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
+
 using namespace std;
 
-vector<int> v;
-int temp;
+int arr[9];
+int main() {
 
-void print(vector<int> v){
-	for(int i = 0; i < 7; i++){
-		cout << v[i] << '\n';
+	for (int i = 0; i < 9; i++) {
+		cin >> arr[i];
 	}
-}
+	sort(arr, arr + 9);
 
-int main(){
-	for(int i = 0; i < 9; i++){
-		cin >> temp;
-		v.push_back(temp);
-	}
-	
-	sort(v.begin(), v.end());	
-	
-	do{
+	do {
 		int sum = 0;
-		for(int i = 0; i < 7; i++){
-			sum += v[i];
+		for (int i = 0; i < 7; i++) {
+			sum += arr[i];
 		}
-		if(sum == 100) break;
-	}while(next_permutation(v.begin(), v.end()));
+		if (sum == 100) break;
+	} while (next_permutation(arr, arr + 9));
 	
-	print(v);
-	
+	for (int i = 0; i < 7; i++) {
+		cout << arr[i] << '\n';
+	}
+
 	return 0;
 }

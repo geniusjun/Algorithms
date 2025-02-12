@@ -1,32 +1,32 @@
 #include <bits/stdc++.h>
 
 using namespace std;
+
 string s;
-vector<char> v;
 int main() {
 
 	getline(cin, s);
 
 	for (int i = 0; i < s.size(); i++) {
-		if (s[i] - '0' >= 17 && s[i] - '0' < 30) {
-			v.push_back(s[i] + 13);
+		if ((int)s[i] >= 65 && (int)s[i] <= 90 ) {
+			if (s[i] > 77) {
+				s[i] = s[i] - 13;
+			}
+			else {
+				s[i] = s[i] + 13;
+			}
 		}
-		else if (s[i] - '0' >= 30 && s[i] - '0' <= 43) {
-			v.push_back(s[i] - 13);
-		}
-		else if (s[i] - '0' >= 49 && s[i] - '0' < 62) {
-			v.push_back(s[i] + 13);
-		}
-		else if (s[i] - '0' >= 62 && s[i] - '0' <=75) {
-			v.push_back(s[i] - 13);
-		}
-		else {
-			v.push_back(s[i]);
+		else if ((int)s[i] >= 97 && (int)s[i] <= 122) {
+			if (s[i] > 109) {
+				s[i] = s[i] - 13;
+			}
+			else {
+				s[i] = s[i] + 13;
+			}
 		}
 	}
-	for (char i : v) {
-		cout << i;
-	}
+	cout << s << '\n';
+
 
 	return 0;
 }

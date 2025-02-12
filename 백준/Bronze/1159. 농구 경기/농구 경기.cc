@@ -2,33 +2,29 @@
 
 using namespace std;
 
-
-int arr[26];
-vector<char> v;
-bool isprogram = false;
+int cnt[26];
+string s;
 int N;
+bool isokay;
 int main() {
+
 	cin >> N;
+
 	for (int i = 0; i < N; i++) {
-		string s;
 		cin >> s;
-		arr[s[0] - 'a']++;
-	}	
+		cnt[s[0] - 'a']++;
+	}
+
 	for (int i = 0; i < 26; i++) {
-		if (arr[i] >= 5) {
-			v.push_back(i + 'a');
+		if (cnt[i] >= 5) {
+			cout << (char)(i + 'a');
+			isokay = true;
 		}
 	}
 
-		if (v.size() == 0) {
-			cout << "PREDAJA" << endl;
-			return 0;
-		}
-		else {
-			for (int i = 0; i < v.size(); i++) {
-				cout << v[i] << "";
-			}
-		}
+	if (!isokay) {
+		cout << "PREDAJA" << '\n';
+	}
 
 	return 0;
 }

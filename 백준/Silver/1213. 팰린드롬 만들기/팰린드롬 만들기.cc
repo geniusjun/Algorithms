@@ -3,22 +3,18 @@
 using namespace std;
 
 string s, ret;
-int cnt[200];
 int flag;
+char cnt[200];
 char mid;
 int main() {
-
-	ios_base::sync_with_stdio(false);
-	cin.tie(0); cout.tie(0);
-
 	cin >> s;
-
-	for (char a : s) cnt[a]++;
+	for (int i = 0; i < s.size(); i++) {
+		cnt[s[i]]++;
+	}
 	for (int i = 'Z'; i >= 'A'; i--) {
 		if (cnt[i]) {
 			if (cnt[i] % 2 == 1) {
-				mid = char(i); 
-				flag++;
+				mid = (char)i; flag++;
 				cnt[i]--;
 			}
 			if (flag == 2) break;
@@ -28,7 +24,7 @@ int main() {
 			}
 		}
 	}
-	if (mid)ret.insert(ret.begin() + (ret.size() / 2), mid);
+	if (mid)ret.insert(ret.begin() + ret.size() / 2, mid);
 	if (flag == 2) cout << "I'm Sorry Hansoo\n";
 	else cout << ret << '\n';
 

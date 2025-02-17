@@ -14,9 +14,8 @@ int main() {
 
 	for (int i = 0; i < N; i++) {
 		for (int j = i+1; j < N; j++) {
-			if (a[i] + a[j] == M && visited[i] == 0 && visited[j] == 0) {
+			if (a[i] + a[j] == M) {
 				ret++;
-				visited[i] = 1, visited[j] = 1;
 			}
 		}
 	}

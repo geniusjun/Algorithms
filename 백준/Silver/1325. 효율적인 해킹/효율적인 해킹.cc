@@ -1,32 +1,52 @@
 #include <bits/stdc++.h>
+
 using namespace std;
- 
-vector<int> v[10001];
-int dp[10001], mx, visited[10001], n, m, a, b;
- 
-int dfs(int here) {  
+
+vector<int> adj[10001];
+vector<int> v;
+int visited[10001];
+int N, M, A, B, ret;
+int mx = -100;
+
+void go(int here) {
 	visited[here] = 1;
-	int ret = 1; 
-	for(int there : v[here]){
-		if(visited[there]) continue;
-		ret += dfs(there); 
-	} 
-	return ret;
+	ret++;
+	for (int there : adj[here]) {
+		if (visited[there]) continue;
+		go(there);
+	}
+	return;
 }
- 
-int main() { 
-	ios_base::sync_with_stdio(0); 
-	cin.tie(0); 
-	cin >> n >> m;  
-	while (m--) {
-     	cin >> a >> b;  
-	    v[b].push_back(a);
-	} 
-	for (int i = 1; i <= n; i++) {
+
+int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL); cout.tie(NULL);
+
+	cin >> N >> M;
+
+	for (int i = 0; i < M; i++) {
+		cin >> A >> B;
+		adj[B].push_back(A);
+	}
+
+	for (int i = 1; i <= N; i++) {
 		memset(visited, 0, sizeof(visited));
-		dp[i] = dfs(i); 
-		mx = max(dp[i], mx);
-	} 
-	for (int i = 1; i <= n; i++) if (mx == dp[i]) cout << i << " "; 
+		go(i);
+		if (ret > mx) {
+			mx = ret;
+			v.clear();
+			v.push_back(i);
+		}
+		else if (ret == mx) {
+			v.push_back(i);
+		}
+		ret = 0;
+	}
+
+	sort(v.begin(), v.end());
+
+	for (int a : v) cout << a << " ";
+
+
 	return 0;
 }

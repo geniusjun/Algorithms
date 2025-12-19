@@ -11,7 +11,7 @@ class Solution {
 
         for(int i = 0; i < r1; i++){
             for(int j = 0; j < c2; j++){
-                for(int k = 0; k < c1; k++){
+                for(int k = 0; k < r2; k++){
                     answer[i][j] += arr1[i][k] * arr2[k][j];
                 }
             }

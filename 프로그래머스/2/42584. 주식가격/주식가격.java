@@ -3,20 +3,24 @@ import java.util.*;
 class Solution {
 
     public int[] solution(int[] prices) {
-        List<Integer> list = new ArrayList<>();
-        for(int i = 0; i < prices.length; i++){
-            int cnt = 0;
-            for(int j = i; j < prices.length; j++){
-                if(prices[j] >= prices[i]){
-                    cnt++;
-                } else{
-                    cnt++;
-                    break;
-                }
+        int n = prices.length;
+        int[] answer = new int[n];
+
+        Stack<Integer> stack = new Stack<>();
+        stack.push(0);
+
+        for(int i = 1; i < n; i++){
+            while(!stack.isEmpty() && prices[i] < prices[stack.peek()]){
+                int j = stack.pop();
+                answer[j] = i - j;
             }
-            list.add(cnt-1);
+            stack.push(i);
         }
 
-        return list.stream().mapToInt(Integer::intValue).toArray();
+        while (!stack.isEmpty()){
+            int j = stack.pop();
+            answer[j] = n - 1 - j;
+        }
+        return answer;
     }
 }

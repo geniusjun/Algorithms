@@ -2,13 +2,14 @@ class Solution
 {
     public int solution(int n, int a, int b)
     {
-        int answer;
+        int round = 0;
 
-        for(answer = 0; a != b; answer++){
+        while(a != b){
             a = (a+1) / 2;
             b = (b+1) / 2;
+            round++;
         }
 
-        return answer;
+        return round;
     }
 }

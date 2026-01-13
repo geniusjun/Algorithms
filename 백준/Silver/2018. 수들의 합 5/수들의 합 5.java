@@ -7,19 +7,25 @@ public class Main {
         String line = bf.readLine();
         StringTokenizer st = new StringTokenizer(line);
         int N = Integer.parseInt(st.nextToken());
-        long cnt = 0;
-        long sum = 0;
-        long left = 1;
+        int cnt = 1;
+        int start = 1;
+        int end = 1;
+        int sum = 1;
 
-        for (long right = 1; right <= N; right++) {
-            sum += right;
-
-            while (sum > N) {
-                sum -= left;
-                left++;
+        while(end != N){
+            if(sum == N){
+                cnt++;
+                end++;
+                sum += end;
             }
-
-            if (sum == N) cnt++;
+            else if(sum < N){
+                end++;
+                sum += end;
+            }
+            else {
+                sum -= start;
+                start++;
+            }
         }
         System.out.println(cnt);
     }

@@ -2,11 +2,12 @@ import java.util.*;
 
 class Solution {
     
-    private static int[] rx = {0, 0, 1, -1};
-    private static int[] ry = {1, -1, 0, 0};
-    
+    public static final int[] dr = {0, 0, 1, -1};
+    public static final int[] dc = {1, -1, 0, 0};
+
     private static class Node {
-        int r, c;
+        int r;
+        int c;
 
         public Node(int r, int c) {
             this.r = r;
@@ -14,9 +15,7 @@ class Solution {
         }
     }
 
-    
     public int solution(int[][] maps) {
-
         int N = maps.length;
         int M = maps[0].length;
 
@@ -24,15 +23,15 @@ class Solution {
 
         ArrayDeque<Node> queue = new ArrayDeque<>();
 
-        queue.addLast(new Node(0, 0));
         dist[0][0] = 1;
+        queue.addLast(new Node(0, 0));
 
         while (!queue.isEmpty()) {
             Node now = queue.pollFirst();
 
             for (int i = 0; i < 4; i++) {
-                int nr = now.r + rx[i];
-                int nc = now.c + ry[i];
+                int nr = now.r + dr[i];
+                int nc = now.c + dc[i];
 
                 if (nr < 0 || nr >= N || nc < 0 || nc >= M) {
                     continue;
@@ -43,12 +42,16 @@ class Solution {
                 }
 
                 if (dist[nr][nc] == 0) {
-                    queue.addLast(new Node(nr, nc));
                     dist[nr][nc] = dist[now.r][now.c] + 1;
+                    queue.addLast(new Node(nr, nc));
                 }
             }
         }
 
-        return dist[N - 1][M - 1] == 0 ? -1 : dist[N - 1][M - 1];
+        if (dist[N - 1][M - 1] == 0) {
+            return -1;
+        } else {
+            return dist[N - 1][M - 1];
+        }
     }
 }

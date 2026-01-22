@@ -2,8 +2,22 @@ import java.util.*;
 
 class Solution {
     public String[] solution(String[] strings, int n) {
-        Arrays.sort(strings, (o1, o2) ->
-                o1.charAt(n) == o2.charAt(n) ? o1.compareTo(o2) : Character.compare(o1.charAt(n), o2.charAt(n)));
+       for (int i = 0; i < strings.length - 1; i++) {
+            for (int j = i + 1; j < strings.length; j++) {
+                if (strings[i].charAt(n) > strings[j].charAt(n)) {
+                    String temp = strings[i];
+                    strings[i] = strings[j];
+                    strings[j] = temp;
+                } else if (strings[i].charAt(n) == strings[j].charAt(n)) {
+                    if (strings[i].compareTo(strings[j]) > 0) {
+                        String temp = strings[i];
+                        strings[i] = strings[j];
+                        strings[j] = temp;
+                    }
+                }
+            }
+        }
+
         return strings;
     }
 }

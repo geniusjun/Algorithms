@@ -10,21 +10,16 @@ public class Main {
         StringTokenizer st = new StringTokenizer(bf.readLine());
         int N = Integer.parseInt(st.nextToken());
         int K = Integer.parseInt(st.nextToken());
-        int sum = 0;
-        int[] arr = new int[N];
+        int[] arr = new int[N + 1];
         StringTokenizer numbers = new StringTokenizer(bf.readLine());
-        for (int i = 0; i < arr.length; i++) {
-            arr[i] = Integer.parseInt(numbers.nextToken());
+        for (int i = 1; i <= N; i++) {
+            int temp = Integer.parseInt(numbers.nextToken());
+            arr[i] = arr[i - 1] + temp;
         }
-        for (int i = 0; i < K; i++) {
-            sum += arr[i];
+        int ret = Integer.MIN_VALUE;
+        for (int i = K; i <= N; i++) {
+            ret = Math.max(ret, arr[i] - arr[i - K]);
         }
-        int max = sum;
-        for (int i = 0; i < arr.length - K; i++) {
-            sum -= arr[i];
-            sum += arr[i + K];
-            max = Math.max(sum, max);
-        }
-        System.out.println(max);
+        System.out.println(ret);
     }
 }

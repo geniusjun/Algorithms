@@ -1,5 +1,3 @@
-
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -43,8 +41,8 @@ public class Main {
             }
         }
         int water = 0;
-        int ret = 1;
-        while (water++ <= max) {
+        int ret = 0;
+        while (water <= max) {
             visited = new int[N][N];
             int safe = 0;
             for (int i = 0; i < N; i++) {
@@ -56,6 +54,7 @@ public class Main {
                 }
             }
             ret = Math.max(ret, safe);
+            water++;
         }
         System.out.println(ret);
     }

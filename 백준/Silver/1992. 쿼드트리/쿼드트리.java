@@ -6,27 +6,33 @@ public class Main {
 
     static String[][] maps;
 
-    static String quad(int y, int x, int size) {
+    static void quad(int y, int x, int size, StringBuilder sb) {
         if (size == 1) {
-            return maps[y][x];
+            sb.append(maps[y][x]);
+            return;
         }
         String now = maps[y][x];
-        String ret = "";
+        boolean same = true;
         for (int i = y; i < y + size; i++) {
             for (int j = x; j < x + size; j++) {
                 if (!now.equals(maps[i][j])) {
-                    ret += "(";
-                    ret += quad(y, x, size / 2);
-                    ret += quad(y, x + size / 2, size / 2);
-                    ret += quad(y + size / 2, x, size / 2);
-                    ret += quad(y + size / 2, x + size / 2, size / 2);
-                    ret += ")";
-                    return ret;
+                    same = false;
+                    break;
                 }
             }
         }
 
-        return maps[y][x];
+        if (same) {
+            sb.append(now);
+            return;
+        }
+
+        sb.append("(");
+        quad(y, x, size / 2, sb);
+        quad(y, x + size / 2, size / 2, sb);
+        quad(y + size / 2, x, size / 2, sb);
+        quad(y + size / 2, x + size / 2, size / 2, sb);
+        sb.append(")");
     }
 
 
@@ -41,7 +47,8 @@ public class Main {
                 maps[i][j] = line[j];
             }
         }
-
-        System.out.println(quad(0, 0, N));
+        StringBuilder sb = new StringBuilder();
+        quad(0, 0, N, sb);
+        System.out.println(sb);
     }
 }

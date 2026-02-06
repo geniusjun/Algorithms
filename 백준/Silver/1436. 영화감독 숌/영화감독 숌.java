@@ -12,14 +12,11 @@ public class Main {
         while (cnt != N) {
             ret++;
             String check = String.valueOf(ret);
-            for (int i = 0; i < check.length() - 2; i++) {
-                if (check.charAt(i) == '6' && check.charAt(i + 1) == '6' && check.charAt(i + 2) == '6') {
-                    cnt++;
-                    break;
-                }
+            if (check.contains("666")) {
+                cnt++;
             }
         }
-
         System.out.println(ret);
     }
+
 }

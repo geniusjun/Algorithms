@@ -79,11 +79,8 @@ public class Main {
 
         ret = Integer.MAX_VALUE;
 
-        for (int i = 0; i < chickens.size(); i++) {
-            findingChickens = new ArrayList<>();
-            findingChickens.add(chickens.get(i));
-            go(i);
-        }
+        findingChickens = new ArrayList<>();
+        go(0);
 
         System.out.println(ret);
     }

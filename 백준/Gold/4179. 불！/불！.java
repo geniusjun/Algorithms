@@ -1,3 +1,4 @@
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -64,8 +65,8 @@ public class Main {
 
                 if (ny < 0 || nx < 0 || ny >= Y || nx >= X) {
                     isSafe = true;
-                    ret = Math.max(ret, visited[front.y][front.x]);
-                    return;
+                    ret = Math.min(ret, visited[front.y][front.x]);
+                    continue;
                 }
                 if (maps[ny][nx].equals("#") || (fireVisited[ny][nx] != 0
                         && fireVisited[ny][nx] <= visited[front.y][front.x] + 1)) {
@@ -100,7 +101,7 @@ public class Main {
                 maps[i][j] = input;
             }
         }
-        ret = 0;
+        ret = Integer.MAX_VALUE;
         fireVisited = new int[Y][X];
         for (int i = 0; i < fires.size(); i++) {
             goFire(fires.get(i));

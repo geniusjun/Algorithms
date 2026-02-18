@@ -43,7 +43,7 @@ public class Main {
             if (movedBrother > maxN) { // 동생이 최대 이동범위를 넘어가면 break
                 break;
             }
-            if (visited[turn % 2][movedBrother] != 0) { // 수빈이가 짝홀이 맞게끔 이동했다면 ok~
+            if (visited[turn % 2][movedBrother] != 0) { // 수빈이가 짝홀이 맞게끔 동생위치에 이미 왔었다면 ok~
                 ok = true;
                 break;
             }

@@ -1,10 +1,10 @@
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Main {
@@ -22,10 +22,10 @@ public class Main {
             }
         }
 
-        String[] names = set.toArray(new String[0]);
-        Arrays.sort(names, Collections.reverseOrder());
-        for (int i = 0; i < names.length; i++) {
-            System.out.println(names[i]);
+        List<String> names = new ArrayList<>(set);
+        names.sort(Collections.reverseOrder());
+        for (int i = 0; i < names.size(); i++) {
+            System.out.println(names.get(i));
         }
     }
 }

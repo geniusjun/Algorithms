@@ -28,8 +28,6 @@ public class Main {
     static void go(Set<Character> set, int idx, Node here) {
         ret = Math.max(idx, ret);
 
-        set.add(maps[here.y][here.x]);
-
         for (int i = 0; i < 4; i++) {
             int ny = here.y + dy[i];
             int nx = here.x + dx[i];
@@ -37,10 +35,11 @@ public class Main {
                 continue;
             }
             if (!set.contains(maps[ny][nx])) {
+                set.add(maps[ny][nx]);
                 go(set, idx + 1, new Node(ny, nx));
+                set.remove(maps[ny][nx]);
             }
         }
-        set.remove(maps[here.y][here.x]);
     }
 
     public static void main(String[] args) throws IOException {
@@ -60,6 +59,7 @@ public class Main {
             }
         }
 
+        visitSet.add(maps[0][0]);
         go(visitSet, 1, new Node(0, 0));
         System.out.println(ret);
     }

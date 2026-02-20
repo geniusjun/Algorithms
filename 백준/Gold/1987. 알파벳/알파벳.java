@@ -1,4 +1,3 @@
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -23,17 +22,18 @@ public class Main {
             this.y = y;
             this.x = x;
         }
+
     }
 
     static void go(Set<Character> set, int idx, Node here) {
-        ret = Math.max(ret, idx);
+        ret = Math.max(idx, ret);
 
         set.add(maps[here.y][here.x]);
 
         for (int i = 0; i < 4; i++) {
             int ny = here.y + dy[i];
             int nx = here.x + dx[i];
-            if (nx < 0 || ny < 0 || ny >= Y || nx >= X) {
+            if (ny < 0 || nx < 0 || ny >= Y || nx >= X) {
                 continue;
             }
             if (!set.contains(maps[ny][nx])) {
@@ -60,9 +60,7 @@ public class Main {
             }
         }
 
-        ret = Integer.MIN_VALUE;
         go(visitSet, 1, new Node(0, 0));
-
         System.out.println(ret);
     }
 }

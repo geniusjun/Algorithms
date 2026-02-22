@@ -9,38 +9,18 @@ public class Main {
 
     static int K;
     static List<Integer>[] answer;
+    static List<Integer> tree;
 
-    static void go(int idx, List<Integer> beforeList, List<Integer> afterList) {
-        if (beforeList.size() == 1 && afterList.size() == 1) {
-            answer[idx].add(beforeList.get(0));
-            answer[idx].add(afterList.get(0));
+    static void go(int level, int start, int end) {
+        if (level == K || start > end) {
             return;
         }
 
-        answer[idx].add(beforeList.get(beforeList.size() / 2));
-        answer[idx].add(afterList.get(afterList.size() / 2));
+        int mid = (start + end) / 2;
+        answer[level].add(tree.get(mid));
 
-        List<Integer> aBeforeList = new ArrayList<>();
-        List<Integer> aAfterList = new ArrayList<>();
-        List<Integer> bBeforeList = new ArrayList<>();
-        List<Integer> bAfterList = new ArrayList<>();
-
-        for (int i = 0; i < beforeList.size() / 2; i++) {
-            aBeforeList.add(beforeList.get(i));
-        }
-        for (int i = beforeList.size() / 2 + 1; i < beforeList.size(); i++) {
-            aAfterList.add(beforeList.get(i));
-        }
-        for (int i = 0; i < afterList.size() / 2; i++) {
-            bBeforeList.add(afterList.get(i));
-        }
-        for (int i = afterList.size() / 2 + 1; i < afterList.size(); i++) {
-            bAfterList.add(afterList.get(i));
-        }
-
-        go(idx + 1, aBeforeList, aAfterList);
-        go(idx + 1, bBeforeList, bAfterList);
-
+        go(level + 1, start, mid - 1);
+        go(level + 1, mid + 1, end);
     }
 
     public static void main(String[] args) throws IOException {
@@ -58,22 +38,12 @@ public class Main {
         size -= 1;
 
         StringTokenizer st = new StringTokenizer(bf.readLine());
-        List<Integer> list = new ArrayList<>();
+        tree = new ArrayList<>();
         for (int i = 0; i < size; i++) {
-            list.add(Integer.parseInt(st.nextToken()));
+            tree.add(Integer.parseInt(st.nextToken()));
         }
 
-        answer[0].add(list.get(size / 2));
-        List<Integer> beforeList = new ArrayList<>();
-        List<Integer> afterList = new ArrayList<>();
-        for (int i = 0; i < size / 2; i++) {
-            beforeList.add(list.get(i));
-        }
-        for (int i = size / 2 + 1; i < size; i++) {
-            afterList.add(list.get(i));
-        }
-
-        go(1, beforeList, afterList);
+        go(0, 0, size - 1);
 
         for (int i = 0; i < K; i++) {
             for (int j = 0; j < answer[i].size(); j++) {

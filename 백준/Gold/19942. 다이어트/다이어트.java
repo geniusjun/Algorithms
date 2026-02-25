@@ -31,18 +31,14 @@ public class Main {
 
     static void go(int protein, int fat, int carbo, int vitamin, List<Integer> foodList, int price, int here) {
         if (protein >= sProtein && fat >= sFat && carbo >= sCarbo && vitamin >= sVitamin) {
-            if (ret == 0) {
-                ret = price;
-                retList = new ArrayList<>(foodList);
-                return;
-            } else if (price < ret) {
+            if (price < ret) {
                 ret = price;
                 retList = new ArrayList<>(foodList);
                 return;
             }
         }
 
-        if (ret != 0 && price > ret) {
+        if (price > ret) {
             return;
         }
 
@@ -79,11 +75,12 @@ public class Main {
             foods[i] = new Food(protein, fat, carbo, vitamin, price);
         }
 
-        ret = 0;
+        ret = Integer.MAX_VALUE;
         List<Integer> foodList = new ArrayList<>();
+        retList = new ArrayList<>();
         go(0, 0, 0, 0, foodList, 0, 0);
 
-        if (ret == 0) {
+        if (ret == Integer.MAX_VALUE) {
             System.out.println(-1);
         } else {
             System.out.println(ret);

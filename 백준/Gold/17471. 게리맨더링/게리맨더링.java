@@ -32,7 +32,7 @@ public class Main {
                         two += people[i].weight;
                     }
                 }
-                ret = Math.min(ret, Math.abs(one - two));
+                ret = Integer.min(ret, Math.abs(one - two));
             }
             return;
         }
@@ -61,7 +61,7 @@ public class Main {
             }
         }
 
-        if (cnt1 == 0 || cnt2 == 0) { // 하나라도 지역구라도 비어있으면 안된다.
+        if (cnt1 == 0 || cnt2 == 0) {
             return false;
         }
 
@@ -69,6 +69,7 @@ public class Main {
         if (v1 != cnt1) {
             return false;
         }
+
         int v2 = find(start2, visited, 2);
         if (v2 != cnt2) {
             return false;
@@ -80,9 +81,11 @@ public class Main {
         visited[idx] = 1;
         int cnt = 1;
         for (int i = 0; i < adjList[idx].size(); i++) {
-            if (visited[adjList[idx].get(i)] == 0 && people[adjList[idx].get(i)].election == group) {
-                cnt += find(adjList[idx].get(i), visited, group);
+            int next = adjList[idx].get(i);
+            if (visited[next] != 0 || people[next].election != group) {
+                continue;
             }
+            cnt += find(next, visited, group);
         }
         return cnt;
     }
@@ -91,7 +94,6 @@ public class Main {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         N = Integer.parseInt(bf.readLine());
         people = new Node[N + 4];
-
         StringTokenizer st = new StringTokenizer(bf.readLine());
         for (int i = 1; i <= N; i++) {
             people[i] = new Node(Integer.parseInt(st.nextToken()), 0);
@@ -99,21 +101,22 @@ public class Main {
         adjList = new ArrayList[N + 4];
         for (int i = 1; i <= N; i++) {
             adjList[i] = new ArrayList<>();
+        }
+
+        for (int i = 1; i <= N; i++) {
             StringTokenizer line = new StringTokenizer(bf.readLine());
             int size = Integer.parseInt(line.nextToken());
             for (int j = 0; j < size; j++) {
                 adjList[i].add(Integer.parseInt(line.nextToken()));
             }
         }
+
         ret = Integer.MAX_VALUE;
         go(0);
-
         if (ret == Integer.MAX_VALUE) {
             System.out.println(-1);
         } else {
             System.out.println(ret);
         }
-
-
     }
 }

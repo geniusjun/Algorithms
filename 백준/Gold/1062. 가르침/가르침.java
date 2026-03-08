@@ -12,7 +12,7 @@ public class Main {
         int cnt = 0;
         for (int i = 0; i < N; i++) {
             int word = words[i];
-            if (word != 0 && (word & mask) == word) {
+            if ((word & mask) == word) {
                 cnt++;
             }
         }
@@ -26,9 +26,10 @@ public class Main {
         if (idx == 26) {
             return count(mask);
         }
-        int ret = go(idx + 1, k - 1, mask | (1 << idx));
-        if (idx != 'a' - 'a' && idx != 'n' - 'a' && idx != 't' - 'a' && idx != 'i' - 'a' && idx != 'c' - 'a') {
-            ret = Math.max(ret, go(idx + 1, k, mask));
+        int ret = go(idx + 1, k - 1, mask | (1 << idx)); // 현재 글자를 배우고 넘어가기
+        if (idx != 'a' - 'a' && idx != 'n' - 'a' && idx != 't' - 'a' && idx != 'i' - 'a'
+                && idx != 'c' - 'a') { // 해당 글자들은 무조건 배워야함
+            ret = Math.max(ret, go(idx + 1, k, mask)); // 현재 글자를 안 배우고 넘어가기
         }
 
         return ret;

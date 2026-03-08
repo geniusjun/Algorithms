@@ -1,59 +1,71 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.StringTokenizer;
 
 public class Main {
 
-    static int n, m;
-    static int[] words = new int[51];
+    static int N, K, ret;
+    static Set<Character> set;
+    static List<String> words;
 
-    static int count(int mask) {
+    static void go(Set<Character> set, int idx) {
+        if (set.size() == K) {
+            if (!set.contains('a') || !set.contains('n') || !set.contains('t') || !set.contains('i') || !set.contains(
+                    'c')) {
+                return;
+            }
+
+            ret = Math.max(ret, readWord(set));
+            return;
+        }
+
+        for (int i = idx; i < 26; i++) {
+            set.add((char) (i + 97));
+            go(set, i + 1);
+            set.remove((char) (i + 97));
+        }
+    }
+
+    static int readWord(Set<Character> set) {
         int cnt = 0;
-        for (int word : words) {
-            if (word != 0 && (word & mask) == word) {
+
+        for (int i = 0; i < words.size(); i++) {
+            boolean isContain = true;
+            for (int j = 0; j < words.get(i).length(); j++) {
+                if (!set.contains(words.get(i).charAt(j))) {
+                    isContain = false;
+                    break;
+                }
+            }
+            if (isContain) {
                 cnt++;
             }
         }
         return cnt;
     }
 
-    static int go(int index, int k, int mask) {
-
-        if (k < 0) return 0;
-
-        if (index == 26) {
-            return count(mask);
-        }
-
-        int ret = go(index + 1, k - 1, mask | (1 << index));
-
-        if (index != ('a' - 'a') &&
-            index != ('n' - 'a') &&
-            index != ('t' - 'a') &&
-            index != ('i' - 'a') &&
-            index != ('c' - 'a')) {
-
-            ret = Math.max(ret, go(index + 1, k, mask));
-        }
-
-        return ret;
-    }
-
     public static void main(String[] args) throws Exception {
+        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(bf.readLine());
 
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
+        N = Integer.parseInt(st.nextToken());
+        K = Integer.parseInt(st.nextToken()); // 0~25
 
-        n = Integer.parseInt(st.nextToken());
-        m = Integer.parseInt(st.nextToken());
+        words = new ArrayList<>();
+        set = new HashSet<>();
 
-        for (int i = 0; i < n; i++) {
-            String s = br.readLine();
-            for (char c : s.toCharArray()) {
-                words[i] |= (1 << (c - 'a'));
-            }
+        for (int i = 0; i < N; i++) {
+            words.add(bf.readLine());
         }
 
-        System.out.println(go(0, m, 0));
+        ret = 0;
+
+        go(set, 0);
+
+        System.out.println(ret);
     }
 }

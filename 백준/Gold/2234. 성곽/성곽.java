@@ -7,8 +7,8 @@ public class Main {
 
     static int Y, X, rooms, maxRoom, afterMaxRoom;
     static int[][] maps, visited;
-    static int[] dy = {-1, 0, 1, 0};
-    static int[] dx = {0, 1, 0, -1};
+    static int[] dy = {0, -1, 0, 1};
+    static int[] dx = {-1, 0, 1, 0};
     static int[] roomCosts; // Connected Component 저장값
 
     static class Node {
@@ -25,34 +25,17 @@ public class Main {
         visited[node.y][node.x] = roomNum;
         int cnt = 1;
         for (int i = 0; i < 4; i++) {
-            int ny = node.y + dy[i];
-            int nx = node.x + dx[i];
-            if (ny < 0 || nx < 0 || ny >= Y || nx >= X || visited[ny][nx] != 0 || isWall(maps[node.y][node.x], dy[i],
-                    dx[i])) {
-                continue;
-            }
+            if ((maps[node.y][node.x] & (1 << i)) == 0) {
+                int ny = node.y + dy[i];
+                int nx = node.x + dx[i];
+                if (ny < 0 || nx < 0 || ny >= Y || nx >= X || visited[ny][nx] != 0) {
+                    continue;
+                }
 
-            cnt += go(new Node(ny, nx), roomNum);
+                cnt += go(new Node(ny, nx), roomNum);
+            }
         }
         return cnt;
-    }
-
-
-    static boolean isWall(int wall, int dy, int dx) {
-        if (dx == -1 && ((wall & (1 << 0)) != 0)) { // 서쪽으로 가려는데 벽이면 못감
-            return true;
-        }
-        if (dy == -1 && ((wall & (1 << 1)) != 0)) { // 북쪽으로 가려는데 벽이면 못감
-            return true;
-        }
-        if (dx == 1 && ((wall & (1 << 2)) != 0)) { // 동쪽으로 가려는데 벽이면 못감
-            return true;
-        }
-        if (dy == 1 && ((wall & (1 << 3)) != 0)) { // 남쪽으로 가려는데 벽이면 못감
-            return true;
-        }
-
-        return false;
     }
 
     public static void main(String[] args) throws IOException {

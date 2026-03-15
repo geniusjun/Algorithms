@@ -21,7 +21,6 @@ public class Main {
             } else if (s.charAt(i) == 'c' && i < s.length() - 2) {
                 if (!(s.charAt(i + 1) == 'h' && s.charAt(i + 2) == 'u')) {
                     isWord = false;
-                    i += 2;
                 }
                 i += 2;
             } else {

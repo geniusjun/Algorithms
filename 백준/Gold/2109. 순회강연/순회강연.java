@@ -8,15 +8,14 @@ import java.util.StringTokenizer;
 public class Main {
 
     static class Lecture {
-        int price;
         int day;
+        int price;
 
-        Lecture(int price, int day) {
-            this.price = price;
+        Lecture(int day, int price) {
             this.day = day;
+            this.price = price;
         }
     }
-
 
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -26,12 +25,13 @@ public class Main {
             StringTokenizer st = new StringTokenizer(br.readLine());
             int price = Integer.parseInt(st.nextToken());
             int day = Integer.parseInt(st.nextToken());
-            list.add(new Lecture(price, day));
+            list.add(new Lecture(day, price));
         }
 
         list.sort((o1, o2) -> {
             return o1.day - o2.day;
         });
+
         PriorityQueue<Integer> pq = new PriorityQueue<>();
         for (int i = 0; i < N; i++) {
             pq.add(list.get(i).price);
@@ -39,7 +39,6 @@ public class Main {
                 pq.poll();
             }
         }
-
         int ret = 0;
         while (!pq.isEmpty()) {
             ret += pq.poll();

@@ -35,7 +35,7 @@ public class Main {
         PriorityQueue<Integer> pq = new PriorityQueue<>();
         for (int i = 0; i < N; i++) {
             pq.add(list.get(i).price);
-            while (pq.size() > list.get(i).day) {
+            if (pq.size() > list.get(i).day) {
                 pq.poll();
             }
         }

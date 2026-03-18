@@ -5,46 +5,42 @@ import java.util.ArrayDeque;
 
 public class Main {
 
+    static String s, b;
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-        String input = br.readLine();
-        String bomb = br.readLine();
-        ArrayDeque<Character> deque = new ArrayDeque<>();
-
-        for (int i = 0; i < input.length(); i++) {
-            char word = input.charAt(i);
-            deque.add(word);
-
-            if (bomb.indexOf(word) != -1) { // 폭발 문자열인 경우
-                boolean isBomb = false;
+        s = br.readLine();
+        b = br.readLine(); // 12ab
+        ArrayDeque<Character> stack = new ArrayDeque<>();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            stack.add(c);
+            if (stack.size() > b.length() - 1 && c == b.charAt(b.length() - 1)) {
                 ArrayDeque<Character> tempQ = new ArrayDeque<>();
-                for (int j = bomb.length() - 1; j >= 0; j--) {
-                    if (deque.isEmpty()) {
-                        isBomb = false;
-                        break;
-                    }
-                    if (deque.peekLast() == bomb.charAt(j)) {
-                        tempQ.addLast(deque.pollLast());
-                        isBomb = true;
+                boolean isBomb = true;
+                for (int j = b.length() - 1; j >= 0; j--) {
+                    char temp = stack.pollLast();
+                    if (temp == b.charAt(j)) {
+                        tempQ.addLast(temp);
                     } else {
+                        tempQ.addLast(temp);
                         isBomb = false;
                         break;
                     }
                 }
-                if (!isBomb) { // 만약 tempQ에 있는게 폭발 문자열이 아니라면 원복
+                if (!isBomb) {
                     while (!tempQ.isEmpty()) {
-                        deque.addLast(tempQ.pollLast());
+                        stack.addLast(tempQ.pollLast());
                     }
                 }
             }
         }
         StringBuilder sb = new StringBuilder();
-        if (deque.isEmpty()) {
+        if (stack.isEmpty()) {
             System.out.println("FRULA");
         } else {
-            while (!deque.isEmpty()) {
-                sb.append(deque.pollFirst());
+            while (!stack.isEmpty()) {
+                sb.append(stack.pollFirst());
             }
             System.out.println(sb);
         }

@@ -12,15 +12,16 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         N = Integer.parseInt(br.readLine());
-        arr = new int[N]; // 수열 담기용
-        cnt = new int[N + 1]; // 중복 체크용
         StringTokenizer st = new StringTokenizer(br.readLine());
+        arr = new int[N];
+        cnt = new int[N + 1];
+
         for (int i = 0; i < N; i++) {
             arr[i] = Integer.parseInt(st.nextToken());
         }
 
-        ret = 0;
         int l = 0;
+        ret = 0;
         for (int r = 0; r < N; r++) {
             cnt[arr[r]]++;
 

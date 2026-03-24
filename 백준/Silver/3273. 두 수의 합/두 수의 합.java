@@ -23,23 +23,17 @@ public class Main {
         ret = 0;
         int l = 0;
         int r = N - 1;
-        long now = arr[l] + arr[r];
-        while (true) {
-            if (l == r) {
-                break;
-            }
+        long now = 0;
+        while (l < r) {
+            now = arr[l] + arr[r];
 
-            if (now >= X) {
-                if (now == X) {
-                    ret++;
-                }
-                now -= arr[r];
+            if (now == X) {
+                ret++;
                 r--;
-                now += arr[r];
             } else if (now < X) {
-                now -= arr[l];
                 l++;
-                now += arr[l];
+            } else if (now > X) {
+                r--;
             }
         }
         System.out.println(ret);

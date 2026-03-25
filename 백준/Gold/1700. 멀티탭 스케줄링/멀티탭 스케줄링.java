@@ -29,35 +29,30 @@ public class Main {
         for (int i = 0; i < K; i++) {
             int now = arr[i];
 
-            // 꽃혀있으면 넘어가기
             if (plug.contains(now)) {
                 continue;
             }
 
-            // 콘센트 비어 있으면 꽃기
             if (plug.size() < N) {
                 plug.add(now);
                 continue;
             }
 
-            // 꽉 찼을때 하나 뺴야함.
-            int target = -1; // 뽑을놈
-            int pos = -1;
+            int target = -1;
+            int fartest = -1;
 
             for (int p : plug) {
-                int nextUse = Integer.MAX_VALUE;
+                int nextPos = Integer.MAX_VALUE;
 
-                // 뽑혀있는 애들중 다음에 나오는 것들 찾기
                 for (int j = i + 1; j < K; j++) {
                     if (arr[j] == p) {
-                        nextUse = j;
+                        nextPos = j;
                         break;
                     }
                 }
 
-                // 뽑혀있는 애들중 다음에 나오는 것중 가장 뒤에 있는 것 뽑자 -> Optimal Page Replacement
-                if (nextUse > pos) {
-                    pos = nextUse;
+                if (nextPos > fartest) {
+                    fartest = nextPos;
                     target = p;
                 }
             }

@@ -37,56 +37,59 @@ public class Main {
         }
     }
 
-    static void cleanUp() {
-        // 왼쪽 ↓
-        for (int i = cleanerY - 1; i >= 1; i--) {
-            maps[i][0] = maps[i - 1][0];
+    static void cleanUp() { // 위쪽은 반시계방향
+        //왼쪽부분 아래로 땡기기
+        for (int i = cleanerY - 1; i >= 0; i--) {
+            if (maps[i + 1][0] == -1) {
+                maps[i][0] = 0;
+                continue;
+            }
+            maps[i + 1][0] = maps[i][0];
+            maps[i][0] = 0;
         }
-
-        // 위쪽 ←
+        // 윗부분 왼쪽으로 한칸씩
         for (int i = 0; i < X - 1; i++) {
             maps[0][i] = maps[0][i + 1];
+            maps[0][i + 1] = 0;
         }
-
-        // 오른쪽 ↑
-        for (int i = 0; i < cleanerY; i++) {
-            maps[i][X - 1] = maps[i + 1][X - 1];
+        // 오른쪽부분 위로 땡기기
+        for (int i = 1; i <= cleanerY; i++) {
+            maps[i - 1][X - 1] = maps[i][X - 1];
+            maps[i][X - 1] = 0;
         }
-
-        // 아래쪽 →
-        for (int i = X - 1; i > 1; i--) {
-            maps[cleanerY][i] = maps[cleanerY][i - 1];
+        // 아래부분 오른쪽으로 땡기기
+        for (int i = X - 2; i >= 1; i--) {
+            maps[cleanerY][i + 1] = maps[cleanerY][i];
+            maps[cleanerY][i] = 0;
         }
-
-        // 공기청정기 옆
-        maps[cleanerY][1] = 0;
     }
 
-    static void cleanDown() {
+    static void cleanDown() { // 아래쪽은 시계방향
         int cleanerDownY = cleanerY + 1;
-
-        // 왼쪽 ↑
-        for (int i = cleanerDownY + 1; i < Y - 1; i++) {
-            maps[i][0] = maps[i + 1][0];
+        // 왼쪽부분 위로 땡기기
+        for (int i = cleanerDownY + 1; i <= Y - 1; i++) {
+            if (maps[i - 1][0] == -1) {
+                maps[i][0] = 0;
+                continue;
+            }
+            maps[i - 1][0] = maps[i][0];
+            maps[i][0] = 0;
         }
-
-        // 아래쪽 ←
-        for (int i = 0; i < X - 1; i++) {
-            maps[Y - 1][i] = maps[Y - 1][i + 1];
+        // 아랫부분 왼쪽으로 땡기기
+        for (int i = 1; i <= X - 1; i++) {
+            maps[Y - 1][i - 1] = maps[Y - 1][i];
+            maps[Y - 1][i] = 0;
         }
-
-        // 오른쪽 ↓
-        for (int i = Y - 1; i > cleanerDownY; i--) {
-            maps[i][X - 1] = maps[i - 1][X - 1];
+        // 오른쪽부분 아래로 땡기기
+        for (int i = Y - 2; i >= cleanerDownY; i--) {
+            maps[i + 1][X - 1] = maps[i][X - 1];
+            maps[i][X - 1] = 0;
         }
-
-        // 위쪽 →
-        for (int i = X - 1; i > 1; i--) {
-            maps[cleanerDownY][i] = maps[cleanerDownY][i - 1];
+        // 위쪽부분 오른쪽으로 땡기기
+        for (int i = X - 2; i >= 1; i--) {
+            maps[cleanerDownY][i + 1] = maps[cleanerDownY][i];
+            maps[cleanerDownY][i] = 0;
         }
-
-        // 공기청정기 옆
-        maps[cleanerDownY][1] = 0;
     }
 
     static boolean canGo(int y, int x) {

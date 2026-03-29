@@ -1,6 +1,8 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -9,225 +11,98 @@ public class Main {
 
     static void go(int[][] maps, int idx) {
         if (idx == 5) {
-            for (int i = 0; i < N; i++) {
-                for (int j = 0; j < N; j++) {
-                    ret = Integer.max(maps[i][j], ret);
-                }
-            }
+            findMax(maps);
             return;
         }
 
-        // 오른쪽 밀기
-        go(right(maps), idx + 1);
-        // 아래로 밀기
-        go(down(maps), idx + 1);
-        // 왼쪽 밀기
-        go(left(maps), idx + 1);
-        // 위로 밀기
-        go(up(maps), idx + 1);
+        for (int i = 0; i < 4; i++) {
+            int[][] next = move(maps, i);
+            go(next, idx + 1);
+        }
     }
 
-    static int[][] right(int[][] maps) {
-        int[][] rMaps = makeNewMap(maps);
-        // 오른쪽으로 다 이동
-        for (int i = 0; i < N; i++) {
-            for (int j = N - 2; j >= 0; j--) {
-                if (rMaps[i][j] == 0) {
-                    continue;
-                }
-                int cnt = 1;
-                while (j + cnt < N && rMaps[i][j + cnt] == 0) {
-                    rMaps[i][j + cnt] = rMaps[i][j + cnt - 1];
-                    rMaps[i][j + cnt - 1] = 0;
-                    cnt++;
-                }
-            }
-        }
-
-        // 합치기
-        for (int i = 0; i < N; i++) {
-            for (int j = N - 2; j >= 0; j--) {
-                if (rMaps[i][j] == 0) {
-                    continue;
-                }
-                if (rMaps[i][j + 1] == rMaps[i][j]) {
-                    rMaps[i][j + 1] = rMaps[i][j + 1] * 2;
-                    rMaps[i][j] = 0;
-                    j--;
-                }
-            }
-        }
-
-        // 오른쪽으로 다 이동
-        for (int i = 0; i < N; i++) {
-            for (int j = N - 2; j >= 0; j--) {
-                if (rMaps[i][j] == 0) {
-                    continue;
-                }
-                int cnt = 1;
-                while (j + cnt < N && rMaps[i][j + cnt] == 0) {
-                    rMaps[i][j + cnt] = rMaps[i][j + cnt - 1];
-                    rMaps[i][j + cnt - 1] = 0;
-                    cnt++;
-                }
-            }
-        }
-        return rMaps;
-    }
-
-    static int[][] left(int[][] maps) {
-        int[][] lMaps = makeNewMap(maps);
-        // 왼쪽으로 다 이동
-        for (int i = 0; i < N; i++) {
-            for (int j = 1; j < N; j++) {
-                if (lMaps[i][j] == 0) {
-                    continue;
-                }
-                int cnt = 1;
-                while (j - cnt >= 0 && lMaps[i][j - cnt] == 0) {
-                    lMaps[i][j - cnt] = lMaps[i][j - cnt + 1];
-                    lMaps[i][j - cnt + 1] = 0;
-                    cnt++;
-                }
-            }
-        }
-
-        // 합치기
-        for (int i = 0; i < N; i++) {
-            for (int j = 1; j < N; j++) {
-                if (lMaps[i][j] == 0) {
-                    continue;
-                }
-                if (lMaps[i][j - 1] == lMaps[i][j]) {
-                    lMaps[i][j - 1] = lMaps[i][j - 1] * 2;
-                    lMaps[i][j] = 0;
-                    j++;
-                }
-            }
-        }
-
-        // 왼쪽으로 다 이동
-        for (int i = 0; i < N; i++) {
-            for (int j = 1; j < N; j++) {
-                if (lMaps[i][j] == 0) {
-                    continue;
-                }
-                int cnt = 1;
-                while (j - cnt >= 0 && lMaps[i][j - cnt] == 0) {
-                    lMaps[i][j - cnt] = lMaps[i][j - cnt + 1];
-                    lMaps[i][j - cnt + 1] = 0;
-                    cnt++;
-                }
-            }
-        }
-        return lMaps;
-    }
-
-    static int[][] up(int[][] maps) {
-        int[][] uMaps = makeNewMap(maps);
-        // 위로 다 이동
-        for (int i = 0; i < N; i++) {
-            for (int j = 1; j < N; j++) {
-                if (uMaps[j][i] == 0) {
-                    continue;
-                }
-                int cnt = 1;
-                while (j - cnt >= 0 && uMaps[j - cnt][i] == 0) {
-                    uMaps[j - cnt][i] = uMaps[j - cnt + 1][i];
-                    uMaps[j - cnt + 1][i] = 0;
-                    cnt++;
-                }
-            }
-        }
-
-        // 합치기
-        for (int i = 0; i < N; i++) {
-            for (int j = 1; j < N; j++) {
-                if (uMaps[j][i] == 0) {
-                    continue;
-                }
-                if (uMaps[j - 1][i] == uMaps[j][i]) {
-                    uMaps[j - 1][i] = uMaps[j - 1][i] * 2;
-                    uMaps[j][i] = 0;
-                    j++;
-                }
-            }
-        }
-        // 위로 다 이동
-        for (int i = 0; i < N; i++) {
-            for (int j = 1; j < N; j++) {
-                if (uMaps[j][i] == 0) {
-                    continue;
-                }
-                int cnt = 1;
-                while (j - cnt >= 0 && uMaps[j - cnt][i] == 0) {
-                    uMaps[j - cnt][i] = uMaps[j - cnt + 1][i];
-                    uMaps[j - cnt + 1][i] = 0;
-                    cnt++;
-                }
-            }
-        }
-        return uMaps;
-    }
-
-    static int[][] down(int[][] maps) {
-        int[][] dMaps = makeNewMap(maps);
-
-        // 아래로 다 이동
-        for (int i = 0; i < N; i++) {
-            for (int j = N - 2; j >= 0; j--) {
-                if (dMaps[j][i] == 0) {
-                    continue;
-                }
-                int cnt = 1;
-                while (j + cnt < N && dMaps[j + cnt][i] == 0) {
-                    dMaps[j + cnt][i] = dMaps[j + cnt - 1][i];
-                    dMaps[j + cnt - 1][i] = 0;
-                    cnt++;
-                }
-            }
-        }
-
-        // 합치기
-        for (int i = 0; i < N; i++) {
-            for (int j = N - 2; j >= 0; j--) {
-                if (dMaps[j][i] == 0) {
-                    continue;
-                }
-                if (dMaps[j + 1][i] == dMaps[j][i]) {
-                    dMaps[j + 1][i] = dMaps[j + 1][i] * 2;
-                    dMaps[j][i] = 0;
-                    j--;
-                }
-            }
-        }
-
-        // 아래로 다 이동
-        for (int i = 0; i < N; i++) {
-            for (int j = N - 2; j >= 0; j--) {
-                if (dMaps[j][i] == 0) {
-                    continue;
-                }
-                int cnt = 1;
-                while (j + cnt < N && dMaps[j + cnt][i] == 0) {
-                    dMaps[j + cnt][i] = dMaps[j + cnt - 1][i];
-                    dMaps[j + cnt - 1][i] = 0;
-                    cnt++;
-                }
-            }
-        }
-        return dMaps;
-    }
-
-
-    static int[][] makeNewMap(int[][] maps) {
-        int[][] dMaps = new int[N][N]; // 참조 끊어서 새로 만들어주기, 원복 안하려고.
+    static void findMax(int[][] maps) {
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
-                dMaps[i][j] = maps[i][j];
+                if (maps[i][j] == 0) {
+                    continue;
+                }
+                ret = Math.max(ret, maps[i][j]);
             }
         }
-        return dMaps;
+    }
+
+    static int[][] move(int[][] maps, int dir) {
+        int[][] next = maps;
+
+        // 왼쪽으로 미는 로직이 동일하게끔 90도 회전해주기.
+        // 90 회전 한번 하면 위로 밀기, 두번하면 왼쪽으로 밀기, 세번하면 아래로 밀기
+        for (int i = 0; i < dir; i++) {
+            next = rotate90(next);
+        }
+
+        // 왼쪽으로 밀기
+        next = moveLeft(next);
+
+        // 원상복귀 하기
+        for (int i = 0; i < (4 - dir) % 4; i++) { // 위로 옮기려고 한번 돌렸으면, 원상복귀하려면 4번돌려줘야함.
+            next = rotate90(next);
+        }
+
+        return next;
+    }
+
+    static int[][] rotate90(int[][] maps) {
+        int[][] rotated = new int[N][N];
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                rotated[j][N - i - 1] = maps[i][j];
+            }
+        }
+        return rotated;
+    }
+
+    // 보드를 왼쪽으로 한번 이동
+    static int[][] moveLeft(int[][] maps) {
+        int[][] next = new int[N][N];
+
+        for (int i = 0; i < N; i++) {
+            int[] line = new int[N];
+
+            for (int j = 0; j < N; j++) {
+                line[j] = maps[i][j];
+            }
+            int[] moved = work(line);
+
+            for (int j = 0; j < N; j++) {
+                next[i][j] = moved[j];
+            }
+        }
+        return next;
+    }
+
+    // 왼쪽으로 밀며 합치기
+    static int[] work(int[] line) {
+        List<Integer> nums = new ArrayList<>();
+
+        for (int i = 0; i < N; i++) {
+            if (line[i] != 0) {
+                nums.add(line[i]);
+            }
+        }
+        int[] result = new int[N];
+        int idx = 0;
+        for (int i = 0; i < nums.size(); i++) {
+            if (i + 1 < nums.size() && nums.get(i).equals(nums.get(i + 1))) {
+                result[idx] = nums.get(i) * 2;
+                i++;
+                idx++;
+            } else {
+                result[idx] = nums.get(i);
+                idx++;
+            }
+        }
+        return result;
     }
 
     public static void main(String[] args) throws IOException {

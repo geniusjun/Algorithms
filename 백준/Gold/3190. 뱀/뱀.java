@@ -9,7 +9,7 @@ public class Main {
     static int[] dy = {0, 1, 0, -1};
     static int[] dx = {1, 0, -1, 0};
     static int N, K, L, ret, sDir;
-    static int[][] maps;
+    static int[][] maps, visited;
     static ArrayDeque<Node> snake;
     static ArrayDeque<Order> orders;
 
@@ -38,6 +38,7 @@ public class Main {
         N = Integer.parseInt(br.readLine());
         K = Integer.parseInt(br.readLine());
         maps = new int[N][N];
+        visited = new int[N][N];
 
         for (int i = 0; i < K; i++) {
             StringTokenizer st = new StringTokenizer(br.readLine());
@@ -61,35 +62,23 @@ public class Main {
         ret = 0;
         sDir = 0;
         snake.addLast(new Node(0, 0));
+        visited[0][0] = 1;
         while (true) {
             ret++;
             // 가기전에 벽이거나 자기 몸이면 game over
             Node head = snake.peekFirst();
             int ny = head.y + dy[sDir];
             int nx = head.x + dx[sDir];
-            if (ny < 0 || nx < 0 || ny >= N || nx >= N) {
+            if (ny < 0 || nx < 0 || ny >= N || nx >= N || visited[ny][nx] != 0) {
                 break;
             }
-            ArrayDeque<Node> tempQ = new ArrayDeque<>();
-            boolean isSnake = false;
-            while (!snake.isEmpty()) {
-                Node body = snake.pollFirst();
-                if (body.y == ny && body.x == nx) {
-                    isSnake = true;
-                    break;
-                }
-                tempQ.addLast(body);
-            }
-            if (isSnake) {
-                break;
-            }
-            snake = tempQ;
             // 사과가 있으면 머리만 증가, 없으면 머리 증가 후 꼬리 감소
+            snake.addFirst(new Node(ny, nx));
+            visited[ny][nx] = 1;
             if (maps[ny][nx] == 0) {
-                snake.addFirst(new Node(ny, nx));
-                snake.pollLast();
+                Node tail = snake.pollLast();
+                visited[tail.y][tail.x] = 0;
             } else {
-                snake.addFirst(new Node(ny, nx));
                 maps[ny][nx] = 0;
             }
 

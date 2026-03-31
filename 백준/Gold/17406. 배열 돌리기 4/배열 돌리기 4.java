@@ -52,25 +52,31 @@ public class Main {
 
     static int[][] rotate(int[][] maps, Order order) {
         int[][] rMaps = new int[Y][X]; // 참조 끊기
-        int rotateCnt = (order.end.y - order.start.y) / 2;
+
+        int sy = order.start.y;
+        int sx = order.start.x;
+        int ey = order.end.y;
+        int ex = order.end.x;
+
+        int rotateCnt = (ey - sy) / 2;
         for (int i = 0; i < rotateCnt; i++) {
             // 위
-            for (int j = order.start.x + i; j <= order.end.x - 1 - i; j++) {
-                rMaps[order.start.y + i][j + 1] = maps[order.start.y + i][j];
+            for (int j = sx + i; j < ex - i; j++) {
+                rMaps[sy + i][j + 1] = maps[sy + i][j];
             }
             // 오른쪽
-            for (int j = order.start.y + i; j <= order.end.y - 1 - i; j++) {
-                rMaps[j + 1][order.end.x - i] = maps[j][order.end.x - i];
+            for (int j = sy + i; j < ey - i; j++) {
+                rMaps[j + 1][ex - i] = maps[j][ex - i];
             }
 
             // 아래
-            for (int j = order.end.x - i; j >= order.start.x + 1 + i; j--) {
-                rMaps[order.end.y - i][j - 1] = maps[order.end.y - i][j];
+            for (int j = ex - i; j > sx + i; j--) {
+                rMaps[ey - i][j - 1] = maps[ey - i][j];
             }
 
             // 왼쪽
-            for (int j = order.end.y - i; j >= order.start.y + 1 + i; j--) {
-                rMaps[j - 1][order.start.x + i] = maps[j][order.start.x + i];
+            for (int j = ey - i; j > sy + i; j--) {
+                rMaps[j - 1][sx + i] = maps[j][sx + i];
             }
         }
 

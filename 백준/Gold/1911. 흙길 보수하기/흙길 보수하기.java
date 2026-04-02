@@ -1,3 +1,5 @@
+
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -48,11 +50,11 @@ public class Main {
             int l = waters[i].l;
             int r = waters[i].r;
 
-            if (nul < l) { // 마지막 널판지 위치가 새로운 웅덩이에 닿지도 못할때
+            if (nul < l) {
                 nul = l;
             }
 
-            if (nul >= r) { // 이미 널판지로 덮혀있다는 뜻
+            if (nul >= r) {
                 continue;
             }
 

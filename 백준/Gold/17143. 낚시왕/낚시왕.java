@@ -64,42 +64,44 @@ public class Main {
     }
 
     static After goY(int here, int s, int d) {
-        while (s > 0) {
+        while (s-- > 0) {
             if (d == 1) { // 위
                 if (here - 1 < 0) {
                     d = 2;
-                    continue;
+                    here++;
+                } else {
+                    here--;
                 }
-                here--;
             } else { // 2 -> 아래
                 if (here + 1 >= Y) {
                     d = 1;
-                    continue;
+                    here--;
+                } else {
+                    here++;
                 }
-                here++;
             }
-            s--;
         }
         return new After(here, d);
     }
 
     static After goX(int here, int s, int d) {
-        while (s > 0) {
+        while (s-- > 0) {
             if (d == 3) { // -> 오른쪽
                 if (here + 1 >= X) {
                     d = 4;
-                    continue;
+                    here--;
+                } else {
+                    here++;
                 }
-                here++;
 
             } else { // 4 -> 왼쪽
                 if (here - 1 < 0) {
                     d = 3;
-                    continue;
+                    here++;
+                } else {
+                    here--;
                 }
-                here--;
             }
-            s--;
         }
         return new After(here, d);
     }

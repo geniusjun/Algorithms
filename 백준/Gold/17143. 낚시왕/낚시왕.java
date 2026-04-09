@@ -123,11 +123,11 @@ public class Main {
             int d = Integer.parseInt(st.nextToken());
             int z = Integer.parseInt(st.nextToken());
 
-            if (s == 1 || s == 2) {
+            if (d == 1 || d == 2) {
                 if (Y > 1) {
                     s %= (2 * (Y - 1));
                 }
-            } else if (s == 3 || s == 4) {
+            } else if (d == 3 || d == 4) {
                 if (X > 1) {
                     s %= (2 * (X - 1));
                 }

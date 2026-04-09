@@ -122,6 +122,16 @@ public class Main {
             int s = Integer.parseInt(st.nextToken());
             int d = Integer.parseInt(st.nextToken());
             int z = Integer.parseInt(st.nextToken());
+
+            if (s == 1 || s == 2) {
+                if (Y > 1) {
+                    s %= (2 * (Y - 1));
+                }
+            } else if (s == 3 || s == 4) {
+                if (X > 1) {
+                    s %= (2 * (X - 1));
+                }
+            }
             maps[y][x] = new Shark(s, d, z);
         }
 

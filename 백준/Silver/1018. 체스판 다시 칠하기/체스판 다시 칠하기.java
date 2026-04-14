@@ -4,61 +4,56 @@ import java.util.StringTokenizer;
 
 public class Main {
 
-    static int N, M;
-    static char[][] board;
-    static int answer = Integer.MAX_VALUE;
-
-    public static void main(String[] args) throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
-
-        N = Integer.parseInt(st.nextToken());
-        M = Integer.parseInt(st.nextToken());
-
-        board = new char[N][M];
-
-        for (int i = 0; i < N; i++) {
-            String s = br.readLine();
-            for (int j = 0; j < M; j++) {
-                board[i][j] = s.charAt(j);
-            }
-        }
-
-        // 8x8 시작점 탐색
-        for (int i = 0; i <= N - 8; i++) {
-            for (int j = 0; j <= M - 8; j++) {
-                answer = Math.min(answer, countRepaint(i, j));
-            }
-        }
-
-        System.out.println(answer);
-    }
+    static int Y, X, ret;
+    static char[][] maps;
 
     static int countRepaint(int sy, int sx) {
-        int whiteStart = 0; // 왼쪽 위가 W라고 가정
-        int blackStart = 0; // 왼쪽 위가 B라고 가정
+        int white = 0;
+        int black = 0;
 
         for (int i = sy; i < sy + 8; i++) {
             for (int j = sx; j < sx + 8; j++) {
-                // (i + j) 짝수칸: 시작색과 같은 색이어야 함
+                // 짝수 칸
                 if ((i + j) % 2 == 0) {
-                    if (board[i][j] != 'W') {
-                        whiteStart++;
+                    if (maps[i][j] != 'W') {
+                        white++;
                     }
-                    if (board[i][j] != 'B') {
-                        blackStart++;
+                    if (maps[i][j] != 'B') {
+                        black++;
                     }
-                } else { // 홀수칸: 시작색과 반대색이어야 함
-                    if (board[i][j] != 'B') {
-                        whiteStart++;
+                } else { // 홀수 칸 시작 색과 반대여야함.
+                    if (maps[i][j] != 'B') {
+                        white++;
                     }
-                    if (board[i][j] != 'W') {
-                        blackStart++;
+                    if (maps[i][j] != 'W') {
+                        black++;
                     }
                 }
             }
         }
 
-        return Math.min(whiteStart, blackStart);
+        return Math.min(white, black);
+    }
+
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        Y = Integer.parseInt(st.nextToken());
+        X = Integer.parseInt(st.nextToken());
+        maps = new char[Y][X];
+        for (int i = 0; i < Y; i++) {
+            String input = br.readLine();
+            for (int j = 0; j < X; j++) {
+                maps[i][j] = input.charAt(j);
+            }
+        }
+        ret = Integer.MAX_VALUE;
+        for (int i = 0; i <= Y - 8; i++) {
+            for (int j = 0; j <= X - 8; j++) {
+                ret = Math.min(ret, countRepaint(i, j));
+            }
+        }
+
+        System.out.println(ret);
     }
 }

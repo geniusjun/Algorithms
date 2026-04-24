@@ -15,7 +15,7 @@ public class Main{
             m = temp;
         }
 
-        System.out.println(cnt);
+        System.out.println(n);
     
     }
 }

@@ -9,20 +9,12 @@ public class Main{
         int n = Integer.parseInt(st.nextToken());
         int m = Integer.parseInt(st.nextToken());
 
-        int cnt = 1;
-
-        while((n % 2 == 0 && m % 2 == 0) || (n % 3 == 0 && m % 3 == 0) ){
-            if(n % 2 == 0 && m % 2 == 0){
-                n /= 2;
-                m /= 2;
-                cnt *= 2;
-            }
-            if(n % 3 == 0 && m % 3 == 0 ){
-                n /= 3;
-                m /= 3;
-                cnt *= 3;
-            }
+        while(m != 0){
+            int temp = n % m;
+            n = m;
+            m = temp;
         }
+
         System.out.println(cnt);
     
     }

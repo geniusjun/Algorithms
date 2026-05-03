@@ -4,21 +4,27 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String s = br.readLine();
+        int N = Integer.parseInt(br.readLine());
 
-        boolean ispal = true;
+        int[] arr = new int[26];
 
-        for(int i = 0; i < s.length() / 2; i++){
-            if(s.charAt(i) != s.charAt(s.length() - 1 - i)){
-                ispal = false;
-                break;
+        for(int i = 0; i < N; i++){
+            String input = br.readLine();
+            arr[input.charAt(0) - 'a']++;
+        }
+
+        StringBuilder sb = new StringBuilder();
+
+        for(int i = 0; i < 26; i++){
+            if(arr[i] >= 5){
+                sb.append((char)(i + 'a'));
             }
         }
 
-        if(ispal){
-            System.out.println(1);
-        } else{
-            System.out.println(0);
+        if(sb.isEmpty()){
+            System.out.println("PREDAJA");
+        } else {
+            System.out.println(sb);
         }
     }
 }

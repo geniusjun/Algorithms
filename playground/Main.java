@@ -7,29 +7,40 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int n = Integer.parseInt(br.readLine());
-        StringBuilder sb = new StringBuilder();
+        String s = br.readLine();
 
-        while(n-- > 0){
-            int f = Integer.parseInt(br.readLine());
-            Map<String, Integer> map = new HashMap<>();
-            int answer = 1;
-            for(int i = 0; i < f; i++){
-                StringTokenizer st = new StringTokenizer(br.readLine());
-                String name = st.nextToken();
-                String kind = st.nextToken();
-                map.put(kind, map.getOrDefault(kind, 0) + 1);
-            }
+        int[] arr = new int[26];
 
-            for(int count : map.values()){
-                answer *= (count+1);
-            }
-
-            answer -= 1;
-
-            sb.append(answer).append('\n');
+        for(int i = 0; i < s.length(); i++){
+            char ch = s.charAt(i);
+            arr[ch - 'A']++;
         }
-
-        System.out.println(sb);
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0; i < 26; i++){
+            while(arr[i] >= 2){
+                sb.append((char) (i + 'A'));
+                arr[i] -= 2;
+            }
+        }
+        char ch = 0;
+        int oneCnt = 0;
+        for(int i = 0; i < 26; i++){
+            if(arr[i] == 1){
+                oneCnt++;
+                arr[i]--;
+                ch = ((char) (i + 'A'));
+            }
+        }
+        String before = String.valueOf(sb);
+        sb.reverse();
+        if(oneCnt > 1){
+            System.out.println("I'm Sorry Hansoo");
+        } else{
+            if(oneCnt == 1 ) {
+                System.out.println(before + String.valueOf(ch) + sb);
+            } else{
+                System.out.println(before + sb);
+            }
+        }
     }
 }

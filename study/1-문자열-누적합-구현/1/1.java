@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.ArrayDeque;
 import java.util.StringTokenizer;
 
-public class Main {
+public class 1 {
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

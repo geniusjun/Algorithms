@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.ArrayDeque;
 import java.util.StringTokenizer;
 
-public class Main {
+public class 곱셈 {
 
     static long A, B, C;
 

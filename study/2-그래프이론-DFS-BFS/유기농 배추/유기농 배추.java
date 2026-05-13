@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.ArrayDeque;
 import java.util.StringTokenizer;
 
-public class Main {
+public class 유기농 배추 {
 
     static int T, Y, X, K, ret;
     static int[][] arr, visited;

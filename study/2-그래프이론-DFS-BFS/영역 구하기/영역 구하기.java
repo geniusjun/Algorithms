@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
-public class Main {
+public class 영역 구하기 {
 
     static int Y, X, K, ret;
     static int[][] visited;

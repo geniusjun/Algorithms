@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.ArrayDeque;
 import java.util.StringTokenizer;
 
-public class Main {
+public class 안전 영역 {
 
     static int T, ret, mxHeight;
     static int[][] arr, visited;

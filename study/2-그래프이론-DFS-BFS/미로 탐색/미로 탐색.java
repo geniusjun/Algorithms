@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.ArrayDeque;
 import java.util.StringTokenizer;
 
-public class Main {
+public class 미로 탐색 {
 
     static int Y, X, ret;
     static int[] dy = {-1, 0, 1, 0};

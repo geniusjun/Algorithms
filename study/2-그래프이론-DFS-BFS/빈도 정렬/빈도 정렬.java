@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
-public class Main {
+public class 빈도정렬 {
 
     static int N, C;
     static Map<Integer, Node> map;

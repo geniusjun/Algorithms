@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
-public class Main {
+public class 비밀번호 발음하기 {
 
     static boolean isOkay(String line){
         boolean isSatis = false;

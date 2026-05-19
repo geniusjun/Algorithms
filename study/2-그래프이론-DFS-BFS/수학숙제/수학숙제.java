@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
-public class Main {
+public class 수학숙제 {
 
     static int N;
     static List<String> list;

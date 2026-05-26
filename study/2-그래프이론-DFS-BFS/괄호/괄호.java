@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class Main {
+public class 괄호 {
 
     static int T;
     static ArrayDeque<Character> stack;

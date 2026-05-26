@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class Main {
+public class 균형잡힌 세상 {
 
     static String input;
     static ArrayDeque<Character> stack;
@@ -30,12 +30,12 @@ public class Main {
                             stack.pollLast();
                         }
                     }
-                        else if(c == ']'){
-                            if(stack.peekLast() == '['){
-                                stack.pollLast();
-                            }
+                    else if(c == ']'){
+                        if(stack.peekLast() == '['){
+                            stack.pollLast();
                         }
-                     else if(c == '(' || c == '['){
+                    }
+                    else if(c == '(' || c == '['){
                         stack.addLast(c);
                     }
                 }

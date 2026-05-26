@@ -1,5 +1,4 @@
 import java.io.*;
-import java.util.*;
 
 public class 영화감독 숌 {
 

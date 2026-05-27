@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class Main {
+public class 연구소 {
 
     static int Y, X, ret;
     static int[] dy = {-1, 0, 1, 0};
@@ -94,9 +94,9 @@ public class Main {
 
         ret = 0;
         // 벽 세우기
-         wall(0,0);
+        wall(0,0);
 
-         System.out.println(ret);
+        System.out.println(ret);
 
 
     }

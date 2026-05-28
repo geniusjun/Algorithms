@@ -3,80 +3,31 @@ import java.util.*;
 
 public class Main {
 
-    static int Y, X, ret;
+    static int Y, X, cnt, cheese, bCheese;
     static int[] dy = {-1, 0, 1, 0};
-    static int[] dx = {0, 1, 0 ,-1};
-    static int[][] maps, nMaps, visited;
-
-    static void wall(int start, int cnt){
-        if(cnt == 3){
-            // 맵 복사해서 바이러스 확산
-            nMaps = makeMaps(maps);
-            visited = new int[Y][X];
-            for(int i = 0; i < Y; i++){
-                for(int j = 0; j < X; j++){
-                    if(nMaps[i][j] == 2 && visited[i][j] == 0){
-                        go(i, j);
-                    }
-                }
-            }
-            ret = Math.max(ret, countSafe());
-
-            return;
-        }
-
-        for(int idx = start; idx < Y * X; idx++) {
-            int y = idx / X;
-            int x = idx % X;
-
-            if (maps[y][x] == 0) {
-                maps[y][x] = 1;
-                wall(idx + 1, cnt + 1);
-                maps[y][x] = 0;
-            }
-        }
-    }
-
-    static int[][] makeMaps(int[][] maps){
-        int[][] nMaps = new int[Y][X];
-        for(int i = 0; i < Y; i++){
-            for(int j = 0; j < X; j++){
-                nMaps[i][j] = maps[i][j];
-            }
-        }
-        return nMaps;
-    }
-
+    static int[] dx = {0, 1, 0, -1};
+    static int[][] maps, visited;
 
     static void go(int y, int x){
         visited[y][x] = 1;
         for(int i = 0; i < 4; i++){
             int ny = y + dy[i];
             int nx = x + dx[i];
-            if(ny < 0 || nx < 0 || ny >= Y || nx >= X || nMaps[ny][nx] == 1 || nMaps[ny][nx] == 2 || visited[ny][nx] == 1){
+            if(ny < 0 || nx < 0 || ny >= Y || nx >= X){
                 continue;
             }
-            nMaps[ny][nx] = 1;
-            go(ny, nx);
-        }
-    }
-
-    static int countSafe(){
-        int cnt = 0;
-        for(int i = 0; i < Y; i++){
-            for(int j = 0; j < X; j++){
-                if(nMaps[i][j] == 0){
-                    cnt++;
+            if(visited[ny][nx] == 0){
+                if(maps[ny][nx] == 1){
+                    maps[ny][nx] = 0;
+                    visited[ny][nx] = 1;
+                    cheese++;
+                } else{
+                    go(ny,nx);
                 }
             }
         }
-        return cnt;
     }
 
-
-    // 벽 세우기
-    // 바이러스 퍼뜨리기
-    // 안전 영역 최신화
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
@@ -84,7 +35,6 @@ public class Main {
         X = Integer.parseInt(st.nextToken());
 
         maps = new int[Y][X];
-
         for(int i = 0; i < Y; i++){
             st = new StringTokenizer(br.readLine());
             for(int j = 0; j < X; j++){
@@ -92,12 +42,21 @@ public class Main {
             }
         }
 
-        ret = 0;
-        // 벽 세우기
-         wall(0,0);
+        cnt = 0;
+        // 치즈 한번 녹이며 갯수 가져오기
+        // 개수가 0이면 마무리
+        while(true){
+            visited = new int[Y][X];
+            cheese = 0;
+            go(0,0);
+            if(cheese == 0) {
+                break;
+            }
+            cnt++;
+            bCheese = cheese;
+        }
 
-         System.out.println(ret);
-
-
+        System.out.println(cnt);
+        System.out.println(bCheese);
     }
 }

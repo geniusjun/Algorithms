@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class Main {
+public class 보석 상자 {
 
     static int child, color, ret;
     static int[] colors;

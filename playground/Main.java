@@ -6,16 +6,16 @@ public class Main {
     static int child, color, ret;
     static int[] colors;
 
-    static boolean check(int mid){
-        long num = 0;
+    static boolean check(int num){
+        long cnt = 0;
         for(int i = 0; i < color; i++){
-            num += colors[i] / mid;
-            if(colors[i] % mid != 0){
-                num++;
+            cnt += colors[i] / num;
+            if(colors[i] %  num != 0){
+                cnt++;
             }
         }
 
-        return num <= child;
+        return cnt <= child;
     }
 
     public static void main(String[] args) throws IOException {
@@ -25,18 +25,17 @@ public class Main {
         color = Integer.parseInt(st.nextToken());
 
         colors = new int[color];
+
         int l = 1;
         int r = 0;
-        int mid;
-        ret = Integer.MAX_VALUE;
-
         for(int i = 0; i < color; i++){
             colors[i] = Integer.parseInt(br.readLine());
             r = Math.max(r, colors[i]);
         }
 
+        ret = Integer.MAX_VALUE;
         while(l <= r){
-            mid = (l + r) / 2;
+            int mid = (l + r) / 2;
             if(check(mid)){
                 ret = Math.min(ret, mid);
                 r = mid - 1;

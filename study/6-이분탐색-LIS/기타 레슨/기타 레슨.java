@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class Main {
+public class 기타 레슨 {
 
     static int N, M, sum, l, r, mx, mid, ret;
     static int[] arr;

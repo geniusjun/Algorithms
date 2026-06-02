@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class Main {
+public class 용돈 관리 {
 
     static int N, M, mx, sum, l, r, ret;
     static int[] arr;

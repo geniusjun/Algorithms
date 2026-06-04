@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class Main {
+public class 먹을 것인가 먹힐 것인가 {
 
     static int T, A, B, ret;
     static int[] arr, brr;

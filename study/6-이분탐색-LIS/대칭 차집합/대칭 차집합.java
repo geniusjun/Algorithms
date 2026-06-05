@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class Main {
+public class 대칭 차집합 {
 
     static int A, B, ret;
     static int[] arr;

@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class Main {
+public class 드래곤 앤 던전 {
 
     static long N, HATK, ret;
     static List<Room> list;

@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class Main {
+public class 게임 {
 
     static int X, Y, ret;
 

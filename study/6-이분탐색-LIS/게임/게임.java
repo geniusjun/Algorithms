@@ -13,12 +13,12 @@ public class 게임 {
         Y = Integer.parseInt(st.nextToken());
         ret = Integer.MAX_VALUE;
 
-        long Z = (Y * 100L) / X;
+        long Z = ((long) Y * 100) / X;
 
         int l = 0, r = 1000000004;
         while(l <= r){
             int mid = (l + r) / 2;
-            long newZ = ((Y + mid) * 100L) / (X + mid);
+            long newZ = ((long)(Y + mid) * 100) / (X + mid);
             if(newZ > Z){
                 ret = Math.min(ret, mid);
                 r = mid - 1;

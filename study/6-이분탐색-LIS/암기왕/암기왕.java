@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class Main {
+public class 암기왕 {
 
     static int T, N, M;
     static Set<Integer> noteSet;

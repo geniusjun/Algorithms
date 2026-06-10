@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class Main {
+public class 파닭파닭 {
 
     static long S, C, sum, ret;
     static List<Long> list;

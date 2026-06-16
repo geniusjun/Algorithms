@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class Main {
+public class 놀이공원2 {
 
     static int M;
     static long N, time;

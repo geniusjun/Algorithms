@@ -35,7 +35,7 @@ public class 놀이공원2 {
         }
 
         long l = 1;
-        long r = 60000000004L;
+        long r = 30L * N;
         time = 0;
         while(l <= r){
             long mid = (l + r) / 2;

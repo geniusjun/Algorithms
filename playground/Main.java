@@ -3,62 +3,55 @@ import java.util.*;
 
 public class Main {
 
-    static int M;
-    static long N, time;
-    static int[] rides;
-
-    static long countPeople(long time){
-        long cnt = M;
-        for(int i = 0; i < M; i++){
-            cnt += time / rides[i];
-        }
-
-        return cnt;
-    }
-
+    static int N, ret;
+    static int[] arr, cnt, prev;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        N = Integer.parseInt(br.readLine());
+
+        arr = new int[N];
+        cnt = new int[N];
+
+        prev = new int[N];
+        Arrays.fill(prev, -1);
+
         StringTokenizer st = new StringTokenizer(br.readLine());
-        N = Long.parseLong(st.nextToken());
-        M = Integer.parseInt(st.nextToken());
-
-        if(N <= M){
-            System.out.println(N);
-            return;
+        for(int i = 0; i < N; i++){
+            arr[i] = Integer.parseInt(st.nextToken());
         }
 
-        rides = new int[M];
-        st = new StringTokenizer(br.readLine());
-        for(int i = 0; i < M; i++){
-            rides[i] = Integer.parseInt(st.nextToken());
-        }
 
-        long l = 1;
-        long r = 60000000004L;
-        time = 0;
-        while(l <= r){
-            long mid = (l + r) / 2;
-            if(countPeople(mid) >= N){
-                time = mid;
-                r = mid - 1;
-            } else{
-                l = mid + 1;
-            }
-        }
-
-        long before = countPeople(time - 1);
-
-        for(int i = 0; i < M; i++){
-            if(time % rides[i] == 0) {
-                before++;
-
-                if (before == N) {
-                    System.out.println(i + 1);
-                    return;
+        ret = 0;
+        int lastIdx = 0;
+        for(int i = 0; i < N; i++){
+            int maxValue = 0;
+            int prevIdx = -1;
+            for(int j = 0; j < i; j++){
+                if(arr[j] < arr[i] && cnt[j] > maxValue){
+                    maxValue = cnt[j];
+                    prevIdx = j;
                 }
             }
+            cnt[i] = maxValue + 1;
+            prev[i] = prevIdx;
+            if(ret < cnt[i]){
+                ret = cnt[i];
+                lastIdx = i;
+            }
         }
+        List<Integer> list = new ArrayList<>();
+        while(lastIdx != -1){
+            list.add(arr[lastIdx]);
+            lastIdx = prev[lastIdx];
+        }
+
+        System.out.println(ret);
+        for(int i = list.size() - 1; i >= 0; i--){
+            System.out.print(list.get(i) + " ");
+        }
+
+
 
     }
 }

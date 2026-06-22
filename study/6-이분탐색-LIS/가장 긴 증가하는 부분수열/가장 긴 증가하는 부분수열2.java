@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class Main {
+public class 가장 긴 증가하는 부분수열2 {
 
     static int N;
     static int[] arr, pos;
@@ -22,6 +22,7 @@ public class Main {
         }
         return l;
     }
+
 
 
     public static void main(String[] args) throws IOException {

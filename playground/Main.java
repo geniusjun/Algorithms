@@ -9,53 +9,35 @@ public class Main {
 
         int N = Integer.parseInt(br.readLine());
 
-        int[] arr = new int[N];
+        int[][] wire = new int[N][2];
+
+        for (int i = 0; i < N; i++) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+
+            wire[i][0] = Integer.parseInt(st.nextToken());
+            wire[i][1] = Integer.parseInt(st.nextToken());
+        }
+
+        Arrays.sort(wire, (o1, o2) -> o1[0] - o2[0]);
+
         int[] dp = new int[N];
-        int[] prev = new int[N];
+        Arrays.fill(dp, 1);
 
-        Arrays.fill(prev, -1);
+        int lis = 1;
 
-        StringTokenizer st = new StringTokenizer(br.readLine());
+        for (int i = 0; i < N; i++) {
 
-        for(int i = 0; i < N; i++){
-            arr[i] = Integer.parseInt(st.nextToken());
-            dp[i] = 1;
-        }
+            for (int j = 0; j < i; j++) {
 
-        int maxLen = 1;
-        int lastIdx = 0;
-
-        for(int i = 0; i < N; i++){
-
-            for(int j = 0; j < i; j++){
-
-                if(arr[j] < arr[i] && dp[j] + 1 > dp[i]){
-                    dp[i] = dp[j] + 1;
-                    prev[i] = j;
+                if (wire[j][1] < wire[i][1]) {
+                    dp[i] = Math.max(dp[i], dp[j] + 1);
                 }
+
             }
 
-            if(dp[i] > maxLen){
-                maxLen = dp[i];
-                lastIdx = i;
-            }
+            lis = Math.max(lis, dp[i]);
         }
 
-        Stack<Integer> stack = new Stack<>();
-
-        while(lastIdx != -1){
-            stack.push(arr[lastIdx]);
-            lastIdx = prev[lastIdx];
-        }
-
-        StringBuilder sb = new StringBuilder();
-
-        sb.append(maxLen).append('\n');
-
-        while(!stack.isEmpty()){
-            sb.append(stack.pop()).append(' ');
-        }
-
-        System.out.println(sb);
+        System.out.println(N - lis);
     }
 }

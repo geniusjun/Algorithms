@@ -2,20 +2,30 @@ import java.util.*;
 import java.io.*;
 
 public class Main {
+
+    static int n;
     public static void main(String[] args) throws Exception{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String input = br.readLine();
-        boolean isPal = true;
-        for(int i = 0; i < input.length() / 2; i++) {
-            if (input.charAt(i) != input.charAt(input.length() - i - 1)) {
-                isPal = false;
+        n = Integer.parseInt(br.readLine());
+
+        int[] arr = new int[26];
+
+        for(int i = 0; i < n; i++){
+            char c = br.readLine().charAt(0);
+            arr[c - 'a']++;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0; i < 26; i++){
+            if(arr[i] >= 5){
+                sb.append((char)(i + 'a'));
             }
         }
 
-        if(isPal){
-            System.out.println(1);
+        if(sb.isEmpty()){
+            System.out.println("PREDAJA");
         } else{
-            System.out.println(0);
+            System.out.println(sb);
         }
     }
 }

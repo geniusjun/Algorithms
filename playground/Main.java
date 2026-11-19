@@ -3,29 +3,32 @@ import java.io.*;
 
 public class Main {
 
-    static int n;
+    // A = 65, Z = 90
+    // a = 97, z = 122
     public static void main(String[] args) throws Exception{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        n = Integer.parseInt(br.readLine());
-
-        int[] arr = new int[26];
-
-        for(int i = 0; i < n; i++){
-            char c = br.readLine().charAt(0);
-            arr[c - 'a']++;
-        }
+        String input = br.readLine();
 
         StringBuilder sb = new StringBuilder();
-        for(int i = 0; i < 26; i++){
-            if(arr[i] >= 5){
-                sb.append((char)(i + 'a'));
+        for(int i = 0; i < input.length(); i++){
+            char c = input.charAt(i);
+            if(c >= 65 && c <= 90) {
+                if(c + 13 > 90){
+                    sb.append((char)(((c+13) % 91) + 65));
+                } else{
+                    sb.append((char)(c + 13));
+                }
+            } else if(c >= 97 && c <= 122){
+                if(c + 13 > 122){
+                    sb.append((char)(((c+13) % 123) + 97));
+                } else{
+                    sb.append((char)(c + 13));
+                }
+            } else{
+                sb.append(c);
             }
         }
 
-        if(sb.isEmpty()){
-            System.out.println("PREDAJA");
-        } else{
-            System.out.println(sb);
-        }
+        System.out.println(sb);
     }
 }

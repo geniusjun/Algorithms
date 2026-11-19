@@ -3,27 +3,32 @@ import java.io.*;
 
 public class Main {
 
-    static int N, K;
+    static int N, M;
 
     public static void main(String[] args) throws Exception{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
-
         N = Integer.parseInt(st.nextToken());
-        K = Integer.parseInt(st.nextToken());
+        M = Integer.parseInt(st.nextToken());
 
-        int[] psum = new int[N + 1];
+        Map<String, Integer> sMap = new HashMap<>();
+        Map<Integer, String> nMap = new HashMap<>();
 
-        st = new StringTokenizer(br.readLine());
         for(int i = 1; i <= N; i++){
-            int num = Integer.parseInt(st.nextToken());
-            psum[i] = psum[i - 1] + num;
-        }
-        int max = Integer.MIN_VALUE;
-        for(int i = K; i <= N; i++){
-            max = Math.max(max, psum[i] - psum[i - K]);
+            String input = br.readLine();
+            sMap.put(input, i);
+            nMap.put(i, input);
         }
 
-        System.out.println(max);
+        for(int i = 0; i < M; i++){
+            String input = br.readLine();
+            try{
+                int idx = Integer.parseInt(input);
+                System.out.println(nMap.get(idx));
+            } catch(Exception e){
+                System.out.println(sMap.get(input));
+            }
+        }
+
     }
 }

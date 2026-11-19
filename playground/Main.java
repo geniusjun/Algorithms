@@ -3,59 +3,27 @@ import java.io.*;
 
 public class Main {
 
-    static int n;
-    static StringBuilder before, after;
+    static int N, K;
 
     public static void main(String[] args) throws Exception{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        n = Integer.parseInt(br.readLine());
-        String pt = br.readLine();
-        before = new StringBuilder();
-        after = new StringBuilder();
+        StringTokenizer st = new StringTokenizer(br.readLine());
 
-        boolean isStar = false;
-        for(int i = 0; i < pt.length(); i++){
-            char c = pt.charAt(i);
-            if(c == '*'){
-                isStar = true;
-                continue;
-            }
-            if(!isStar){
-                before.append(c);
-            } else{
-                after.append(c);
-            }
+        N = Integer.parseInt(st.nextToken());
+        K = Integer.parseInt(st.nextToken());
+
+        int[] psum = new int[N + 1];
+
+        st = new StringTokenizer(br.readLine());
+        for(int i = 1; i <= N; i++){
+            int num = Integer.parseInt(st.nextToken());
+            psum[i] = psum[i - 1] + num;
         }
-        after.reverse();
-        int ptLength = before.length() + after.length();
-        boolean isOkay = true;
-        for(int i = 0; i < n; i++){
-            isOkay = true;
-            String input = br.readLine();
-            if(input.length() < ptLength){
-                System.out.println("NE");
-                continue;
-            }
-
-            for(int j = 0; j < before.length(); j++){
-                if(input.charAt(j) != before.charAt(j)){
-                    isOkay = false;
-                    break;
-                }
-            }
-            for(int k = 0; k < after.length(); k++){
-                if(input.charAt(input.length() - 1 - k) != after.charAt(k)){
-                    isOkay = false;
-                    break;
-                }
-            }
-
-            if(isOkay){
-                System.out.println("DA");
-            } else{
-                System.out.println("NE");
-            }
+        int max = Integer.MIN_VALUE;
+        for(int i = K; i <= N; i++){
+            max = Math.max(max, psum[i] - psum[i - K]);
         }
 
+        System.out.println(max);
     }
 }

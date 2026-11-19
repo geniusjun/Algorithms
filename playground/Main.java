@@ -3,32 +3,59 @@ import java.io.*;
 
 public class Main {
 
-    // A = 65, Z = 90
-    // a = 97, z = 122
+    static int n;
+    static StringBuilder before, after;
+
     public static void main(String[] args) throws Exception{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String input = br.readLine();
+        n = Integer.parseInt(br.readLine());
+        String pt = br.readLine();
+        before = new StringBuilder();
+        after = new StringBuilder();
 
-        StringBuilder sb = new StringBuilder();
-        for(int i = 0; i < input.length(); i++){
-            char c = input.charAt(i);
-            if(c >= 65 && c <= 90) {
-                if(c + 13 > 90){
-                    sb.append((char)(((c+13) % 91) + 65));
-                } else{
-                    sb.append((char)(c + 13));
-                }
-            } else if(c >= 97 && c <= 122){
-                if(c + 13 > 122){
-                    sb.append((char)(((c+13) % 123) + 97));
-                } else{
-                    sb.append((char)(c + 13));
-                }
+        boolean isStar = false;
+        for(int i = 0; i < pt.length(); i++){
+            char c = pt.charAt(i);
+            if(c == '*'){
+                isStar = true;
+                continue;
+            }
+            if(!isStar){
+                before.append(c);
             } else{
-                sb.append(c);
+                after.append(c);
+            }
+        }
+        after.reverse();
+        int ptLength = before.length() + after.length();
+        boolean isOkay = true;
+        for(int i = 0; i < n; i++){
+            isOkay = true;
+            String input = br.readLine();
+            if(input.length() < ptLength){
+                System.out.println("NE");
+                continue;
+            }
+
+            for(int j = 0; j < before.length(); j++){
+                if(input.charAt(j) != before.charAt(j)){
+                    isOkay = false;
+                    break;
+                }
+            }
+            for(int k = 0; k < after.length(); k++){
+                if(input.charAt(input.length() - 1 - k) != after.charAt(k)){
+                    isOkay = false;
+                    break;
+                }
+            }
+
+            if(isOkay){
+                System.out.println("DA");
+            } else{
+                System.out.println("NE");
             }
         }
 
-        System.out.println(sb);
     }
 }

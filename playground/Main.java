@@ -3,38 +3,37 @@ import java.io.*;
 
 public class Main {
 
-    static int N, M, ret;
+    static int n, ret;
+    static ArrayDeque<Character> deque;
 
     public static void main(String[] args) throws Exception{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        N = Integer.parseInt(br.readLine());
-        M = Integer.parseInt(br.readLine());
 
-        int[] arr = new int[N];
+        n = Integer.parseInt(br.readLine());
+        while(n-- >0){
+            String input = br.readLine();
+            deque = new ArrayDeque<>();
 
-        StringTokenizer st = new StringTokenizer(br.readLine());
+            for(int i = 0; i < input.length(); i++){
+                char c = input.charAt(i);
+                if(deque.isEmpty()){
+                    deque.addLast(c);
+                    continue;
+                }
+                if(deque.peekLast() == c){
+                    deque.pollLast();
+                } else{
+                    deque.addLast(c);
+                }
+            }
 
-        for(int i = 0; i < N; i++){
-            arr[i] = Integer.parseInt(st.nextToken());
-        }
-
-        Arrays.sort(arr);
-
-        int l = 0;
-        int r = arr.length - 1;
-
-        while(l < r){
-            if(arr[l] + arr[r] < M){
-                l++;
-            } else if(arr[l] + arr[r] > M){
-                r--;
-            } else{
+            if (deque.isEmpty()) {
                 ret++;
-                l++;
             }
         }
 
         System.out.println(ret);
+
     }
 
 }

@@ -1,65 +1,72 @@
 import java.util.*;
 import java.io.*;
 
-public class Main {
+public class Main{
 
-    static int Y, X;
-    static int[][] maps, visited;
     static int[] dy = {-1, 0, 1, 0};
     static int[] dx = {0, 1, 0, -1};
+    static int M, N, K, ret, cnt;
+    static int[][] arr, visited;
+    static List<Integer> list;
 
-    static class Node{
-        int y;
-        int x;
+    static void go(int y, int x){
+        cnt++;
+        visited[y][x] = 1;
+        for(int i = 0; i < 4; i++){
+            int ny = y + dy[i];
+            int nx = x + dx[i];
+            if(ny < 0 || nx < 0 || ny >= M || nx >= N || visited[ny][nx] != 0 || arr[ny][nx] != 0){
+                continue;
+            }
 
-        Node(int y, int x){
-            this.y = y;
-            this.x = x;
+            go(ny,nx);
         }
     }
 
 
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
+        M = Integer.parseInt(st.nextToken());
+        N = Integer.parseInt(st.nextToken());
+        K = Integer.parseInt(st.nextToken());
 
-        Y = Integer.parseInt(st.nextToken());
-        X = Integer.parseInt(st.nextToken());
+        arr = new int[M][N];
+        visited = new int[M][N];
 
-        maps = new int[Y][X];
-        visited = new int[Y][X];
-
-        for(int i = 0; i < Y; i++){
-            String input = br.readLine();
-            for(int j = 0; j < X; j++){
-                maps[i][j] = input.charAt(j) - '0';
+        while(K-- > 0){
+            st = new StringTokenizer(br.readLine());
+            int lx = Integer.parseInt(st.nextToken());
+            int ly = Integer.parseInt(st.nextToken());
+            int rx = Integer.parseInt(st.nextToken());
+            int ry = Integer.parseInt(st.nextToken());
+            for(int i = ly; i < ry; i++){
+                for(int j = lx; j < rx; j++){
+                    arr[i][j] = 1;
+                }
             }
         }
 
-        visited[0][0] = 1;
-        ArrayDeque<Node> deque = new ArrayDeque<>();
-        deque.addLast(new Node(0,0));
-        while (!deque.isEmpty()) {
-            Node front = deque.pollFirst();
-            for(int i = 0; i < 4; i++){
-                int ny = front.y + dy[i];
-                int nx = front.x + dx[i];
-
-                if(ny < 0 || nx < 0 || ny >= Y || nx >= X){
-                    continue;
+        ret = 0;
+        list = new ArrayList<>();
+        for(int i = 0; i < M; i++){
+            for(int j = 0; j < N; j++){
+                if(arr[i][j] == 0 && visited[i][j] == 0){
+                    cnt = 0;
+                    ret++;
+                    go(i, j);
+                    list.add(cnt);
                 }
-
-                if(maps[ny][nx] == 0 || visited[ny][nx] != 0){
-                    continue;
-                }
-
-                visited[ny][nx] = visited[front.y][front.x] + 1;
-                deque.addLast(new Node(ny, nx));
             }
         }
 
-        System.out.println(visited[Y - 1][X - 1]);
+        list.sort((o1, o2) ->{
+            return o1 - o2;
+        });
+        System.out.println(ret);
+        for(int i : list){
+            System.out.print(i + " ");
+        }
 
     }
-
 }
